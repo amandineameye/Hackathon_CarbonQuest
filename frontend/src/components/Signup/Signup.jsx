@@ -7,8 +7,8 @@ const Signup = ({ onSwitchToLogin }) => {
    return (
       <>
          <div className="px-8 pt-14 pb-8">
-            <h2 className="text-2xl text-title font-semibold font-title text-center mb-5">
-               Inscris toi pour jouer
+            <h2 className="text-center">
+               Inscris-toi pour jouer
             </h2>
             <form className="flex flex-col gap-3">
                <div>
@@ -36,13 +36,13 @@ const Signup = ({ onSwitchToLogin }) => {
                      )}
                   </div>
                </div>
-               <button className="bg-custom-light-green font-medium text-title py-1.5 rounded-lg mt-4 block w-full hover:bg-custom-dark-green hover:text-white transition-200">
+               <button className="bg-text font-medium text-white py-1.5 rounded-lg mt-4 block w-full hover:bg-text-light transition-200">
                   Créer un compte
                </button>
             </form>
 
             <p className="text-center font-medium text-title mt-6"
-               onClick={onSwitchToLogin}>Déjà inscris ? <span className='cursor-pointer font-semibold text-custom-green hover:text-custom-dark-green underline'>Se connecter</span></p>
+               onClick={onSwitchToLogin}>Déjà inscris ? <span className='cursor-pointer font-semibold text-custom-pink hover:text-custom-purple underline'>Se connecter</span></p>
          </div>
       </>
    );

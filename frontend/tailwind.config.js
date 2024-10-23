@@ -9,6 +9,8 @@ module.exports = {
    ],
    theme: {
       fontFamily: {
+         'logo': ['Bubbles', 'system-ui'],
+         'logo2': ['Matemasie', 'serif'],
          'title': ['Josefin', 'sans-serif']
       },
 
@@ -18,8 +20,9 @@ module.exports = {
          },
          colors: {
             ...colors,
-            'text': '#2a495b',
             'title': '#1c2743',
+            'text': '#2a495b',
+            'text-light': '#3e5b6a',
             'custom-green': '#6b917e',
             'custom-light-green': '#a6c998',
             'custom-dark-green': '#66856c',

@@ -1,4 +1,13 @@
 @font-face {
+   font-family: 'Bubbles';
+   src:url('./fonts/rubik_bubbles/RubikBubbles-Regular.ttf');
+}
+
+@font-face {
+   font-family: 'Matemasie';
+   src:url('./fonts/matemasie/Matemasie-Regular.ttf');
+}
+@font-face {
    font-family: 'Josefin';
    src:url('./fonts/josefin/JosefinSans-VariableFont_wght.ttf');
 }
@@ -13,14 +22,13 @@
 
 @layer base {
    #root {
-      width: 100vw;
       min-height: 100vh;
       display:flex;
       flex-direction: column;
    }
    html {
       font-family: 'Quicksand', sans-serif;
-      background-color: #f6f7f7;
+      background-color: #bdd2c6;
    }
    .input {
       @apply text-text border border-gray-400 w-full rounded-lg py-1.5 outline-none px-4 focus:ring-1 focus:ring-inset focus:ring-blue-200;
@@ -32,5 +40,21 @@
 
    .transition-200 {
       @apply transition duration-200 ease-in-out;
-  }
+   }
+
+   li:not(:last-child) {
+      @apply pb-2
+   }
+
+   h1 {
+      @apply text-4xl text-title font-title font-bold ;
+   }
+
+   h2 {
+      @apply text-2xl text-title font-semibold font-title mb-5;
+   }
+
+   h3 {
+      @apply text-xl text-title font-semibold font-title mb-3 mt-2;
+   }
 }
