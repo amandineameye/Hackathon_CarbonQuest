@@ -1,0 +1,74 @@
+[
+    {
+        "id":1,
+        "content":"Bonjour, \u00e7a va ?",
+        "answers":[
+            {
+                "id":3,
+                "content":"Oui",
+                "value":true,
+                "question":"1"
+            },
+            {
+                "id":4,
+                "content":"Non",
+                "value":false,
+                "question":"1"
+            }
+        ]
+    },
+    {
+        "id":2,
+        "content":"La vie est belle ?",
+        "answers":[
+            {
+                "id":7,
+                "content":"Oui",
+                "value":true,
+                "question":"2"
+            },
+            {
+                "id":8,
+                "content":"Non",
+                "value":false,
+                "question":"2"
+            }
+        ]
+    },
+    {
+        "id":3,
+        "content":"Il fait beau ?",
+        "answers":[
+            {
+                "id":5,
+                "content":"Oui",
+                "value":true,
+                "question":"3"
+            },
+            {
+                "id":6,
+                "content":"Non",
+                "value":false,
+                "question":"3"
+            }
+        ]
+    },
+    {
+        "id":4,
+        "content":"Bien dormi ?",
+        "answers":[
+            {
+                "id":1,
+                "content":"Oui",
+                "value":true,
+                "question":"4"
+            },
+            {
+                "id":2,
+                "content":"Non",
+                "value":false,
+                "question":"4"
+            }
+        ]
+    }
+]

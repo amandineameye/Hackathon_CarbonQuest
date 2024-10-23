@@ -1,0 +1,11 @@
+[
+    {
+        "id":1,
+        "value":64,
+        "user":{
+            "id":1,
+            "pseudo":"Jean",
+            "email":"J@mail.net",
+            "password":"trucpassafe",
+            "scores":
+            ["1",{"id":2,"value":130,"user":"1"}]}},{"id":2,"value":130,"user":{"id":1,"pseudo":"Jean","email":"J@mail.net","password":"trucpassafe","scores":[{"id":1,"value":64,"user":"1"},"2"]}},{"id":3,"value":86,"user":{"id":2,"pseudo":"Chat","email":"C@mail.net","password":"chosepassafe","scores":["3",{"id":4,"value":100,"user":"2"}]}},{"id":4,"value":100,"user":{"id":2,"pseudo":"Chat","email":"C@mail.net","password":"chosepassafe","scores":[{"id":3,"value":86,"user":"2"},"4"]}},{"id":5,"value":203,"user":{"id":3,"pseudo":"Pot","email":"P@mail.net","password":"bolpassafe","scores":["5"]}},{"id":6,"value":25,"user":{"id":4,"pseudo":"Th\u00e9","email":"T@mail.net","password":"boissonpassafe","scores":["6"]}}]
