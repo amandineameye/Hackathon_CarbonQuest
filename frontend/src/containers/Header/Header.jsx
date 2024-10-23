@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import AuthModal from '../AuthModal/AuthModal';
 
-const Header = ({ onShowModal }) => {
+const Header = () => {
 
    const [isAuthModalVisible, setIsAuthModalVisible] = useState(false); // AuthModal visibility state
    const [authModalType, setAuthModalType] = useState('login'); // Either 'login' or 'signup'
@@ -37,8 +37,8 @@ const Header = ({ onShowModal }) => {
                <div className="font-title text-custom-blue text-2xl sm:text-3xl">Carbon Quest</div>
                <nav className="flex justify-between items-center">
                   <ul className="flex items-center gap-4">
-                     <li><a href="#" onClick={handleLoginModal} className="text-lg font-medium text-custom-blue hover:text-black px-2 py-4">Log in</a></li>
-                     <li><a href="#" onClick={handleSignUpModal} className="text-lg font-medium text-custom-blue hover:text-black px-2 py-4">Sign up</a></li>
+                     <li><a href="#" onClick={handleLoginModal} className="text-lg font-medium bg-custom-yellow hover:bg-custom-light-yellow rounded-xl text-title hover:text-black p-3 transition-200">Log in</a></li>
+                     <li><a href="#" onClick={handleSignUpModal} className="text-lg font-medium text-title hover:text-black px-2 py-4">Sign up</a></li>
                   </ul>
                </nav>
             </div>

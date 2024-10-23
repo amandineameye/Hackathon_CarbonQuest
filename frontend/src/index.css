@@ -1,16 +1,36 @@
+@font-face {
+   font-family: 'Josefin';
+   src:url('./fonts/josefin/JosefinSans-VariableFont_wght.ttf');
+}
+@font-face {
+   font-family: 'Quicksand';
+   src:url('./fonts/quicksand/Quicksand-VariableFont_wght.ttf');
+}
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 @layer base {
+   #root {
+      width: 100vw;
+      min-height: 100vh;
+      display:flex;
+      flex-direction: column;
+   }
    html {
       font-family: 'Quicksand', sans-serif;
+      background-color: #f6f7f7;
    }
    .input {
-      @apply border border-gray-400 w-full rounded-lg py-1.5 outline-none px-4 focus:ring-1 focus:ring-inset focus:ring-blue-200;
+      @apply text-text border border-gray-400 w-full rounded-lg py-1.5 outline-none px-4 focus:ring-1 focus:ring-inset focus:ring-blue-200;
    }
 
    .input-label {
-      @apply text-black block pb-1 font-medium;
+      @apply text-title block pb-1 font-medium;
    }
+
+   .transition-200 {
+      @apply transition duration-200 ease-in-out;
+  }
 }
