@@ -11,6 +11,6 @@
    }
 
    .input-label {
-      @apply text-darkerText block pb-1 font-medium;
+      @apply text-black block pb-1 font-medium;
    }
 }
