@@ -6,17 +6,17 @@ const Login = ({ onSwitchToSignup }) => {
 
    return (
       <>
-         <div className="px-8 pt-16 pb-8">
-            <h2 className="text-2xl text-black font-semibold font-title text-center mb-5">
-               Log in to save your trips
+         <div className="px-8 pt-14 pb-8">
+            <h2 className="text-center">
+               Connecte-toi pour jouer
             </h2>
             <form className="flex flex-col gap-3">
                <div>
-                  <label htmlFor="username" className="input-label text-black">Username</label>
+                  <label htmlFor="username" className="input-label">Nom du joueur</label>
                   <input id="username" type="text" className="input" />
                </div>
                <div>
-                  <label htmlFor="password" className="input-label text-black">Password</label>
+                  <label htmlFor="password" className="input-label">Mot de passe</label>
                   <div className="relative">
                      <input className="input pr-8" id="password" type={showPassword ? "text" : "password"} />
                      {showPassword ? (
@@ -32,12 +32,12 @@ const Login = ({ onSwitchToSignup }) => {
                      )}
                   </div>
                </div>
-               <button className="bg-custom-pink text-white py-1.5 rounded-lg mt-4 block w-full hover:bg-custom-purple transition-200">
-                  Submit
+               <button className="bg-text font-medium text-white py-1.5 rounded-lg mt-4 block w-full hover:bg-text-light transition-200">
+                  Se connecter
                </button>
             </form>
-            <p className="text-center text-black mt-6"
-               onClick={onSwitchToSignup}>Don't have an account yet? <span className='cursor-pointer font-medium text-custom-purple hover:text-custom-pink underline'>Sign up</span></p>
+            <p className="text-center font-medium text-title mt-6"
+               onClick={onSwitchToSignup}>Pas encore de compte ? <span className='cursor-pointer font-semibold text-custom-pink hover:text-custom-purple underline'>S'inscrire</span></p>
          </div>
       </>
    );
