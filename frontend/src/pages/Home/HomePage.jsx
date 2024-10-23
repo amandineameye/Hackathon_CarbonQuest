@@ -42,7 +42,7 @@ const HomePage = () => {
 									question sur le Green IT.
 								</li>
 								<li>
-									Une mauvaise décision ne vous empêche pas de continuer à
+									Une mauvaise réponse ne vous empêche pas de continuer à
 									monter, mais elle affectera le résultat final.
 								</li>
 								<li>
