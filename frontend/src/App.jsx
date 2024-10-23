@@ -1,8 +1,14 @@
+import Footer from './containers/Footer/Footer';
+import Header from './containers/Header/Header';
+import Home from './containers/Home/Home';
+
 function App() {
 
    return (
       <>
-         <h1>Carbon Quest</h1>
+         <Header />
+         <Home />
+         <Footer />
       </>
    );
 }
