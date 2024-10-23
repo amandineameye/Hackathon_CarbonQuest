@@ -3,7 +3,7 @@ import axios from "axios";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 
-const Login = ({ onSwitchToSignup }) => {
+const Login = ({ onSwitchToSignup, onSuccessfulConnection }) => {
 	const [showPassword, setShowPassword] = useState(false);
 	const [username, setUsername] = useState("");
 	const [password, setPassword] = useState("");
@@ -31,6 +31,7 @@ const Login = ({ onSwitchToSignup }) => {
 				// La réponse de l'API doit contenir un champ indiquant si la connexion a réussi (par exemple, response.data.success). Cette structure doit être gérée par les WAD
 				console.log("Connexion réussie:", response.data);
 				navigate("/game");
+				onSuccessfulConnection();
 			} else {
 				setErrorMessage(response.data.message || "Identifiants incorrects.");
 			}
