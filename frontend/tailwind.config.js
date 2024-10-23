@@ -18,15 +18,17 @@ module.exports = {
          },
          colors: {
             ...colors,
-            'text': '#12a495b',
+            'text': '#2a495b',
             'title': '#1c2743',
             'custom-green': '#6b917e',
             'custom-light-green': '#a6c998',
             'custom-dark-green': '#66856c',
             'custom-yellow': '#c8d87d',
+            'custom-light-yellow': '#dfe8ae',
             'custom-purple': '#b19b95',
             'custom-pink': '#d6827c',
             'custom-grey': '#849a98',
+            'page-bg': '#f6f7f7',
          },
          container: {
             center: true,
