@@ -79,7 +79,7 @@ const HomePage = () => {
               <h3>Comment jouer ?</h3>
               <ul className="pb-4">
                 <li>
-				Utilisez les touches directionnelles pour déplacer votre avatar vers le haut de la forêt.
+				Utilisez les touches directionnelles vous déplacer vers le haut de la forêt.
                 </li>
                 <li>
                   À chaque palier, un esprit de la forêt vous posera une
