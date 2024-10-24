@@ -6,9 +6,9 @@ const ResultsPage = () => {
    // Si le score est entre 6 et 8 --> Éco-Explorateur, tu maîtrise bien les bases du Green IT.
    // Si le score est entre 9 et 10 (inclus) --> Green IT Guru, tu excelles le sujet !
 
-   const score = 6;
+   const score = 10;
    const question = '';
-   const RealAnswer = '';
+   const GoodAnswer = '';
    const GamerAnswer = '';
    const link = '';
 
