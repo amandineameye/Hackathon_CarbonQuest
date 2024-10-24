@@ -10,31 +10,56 @@
             $this->db = $db;
         }
 
-        public function getQuestionsAndResponses()
-        {   
-            // Requête SQL pour récupérer les questions et réponses
-            $sql = "SELECT q.id AS idQuestion, q.content AS question, a.value AS response 
-                    FROM question q
-                    JOIN answer a ON q.id = a.question_id
-                    WHERE a.value IN ('Oui', 'Non')";
+        public function getAllQuestions()
+{   
+    // Requête SQL pour récupérer toutes les questions
+    $sql = "SELECT id AS idQuestion, content AS question FROM question";
 
-            try {
-                // Préparer la requête
-                $stmt = $this->db->prepare($sql);
+    try {
+        // Préparer la requête
+        $stmt = $this->db->prepare($sql);
 
-                // Exécuter la requête
-                $stmt->execute();
+        // Exécuter la requête
+        $stmt->execute();
 
-                // Récupérer les résultats
-                $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        // Récupérer les résultats
+        $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-                // Retourner les résultats ou un tableau vide si aucun résultat n'est trouvé
-                return $results ? $results : [];
+        // Retourner les résultats ou un tableau vide si aucun résultat n'est trouvé
+        return $results ?: [];
 
-            } catch (PDOException $e) {
-                echo "Erreur lors de la récupération des questions et réponses : " . $e->getMessage();
-                return [];
-            }
+    } catch (PDOException $e) {
+        echo "Erreur lors de la récupération des questions : " . $e->getMessage();
+        return [];
+    }
+
+
+}
+
+public function getAllAnswers()
+{   
+    // Requête SQL pour récupérer toutes les réponses
+    $sql = "SELECT id AS idAnswer, value AS response, question_id AS idQuestion FROM answer";
+
+    try {
+        // Préparer la requête
+        $stmt = $this->db->prepare($sql);
+
+        // Exécuter la requête
+        $stmt->execute();
+
+        // Récupérer les résultats
+        $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        // Retourner les résultats ou un tableau vide si aucun résultat n'est trouvé
+        return $results ?: [];
+
+    } catch (PDOException $e) {
+        echo "Erreur lors de la récupération des réponses : " . $e->getMessage();
+        return [];
+    }
+}
+
 
             // Appel pour récupérer les questions et les réponses
             // $questionsResponses = $dataGateway->getQuestionsAndResponses();
@@ -45,8 +70,7 @@
             // } else {
             //     echo "Aucune question ou réponse trouvée.";
             // }
-        }
-
+       
         public function findUser($pseudo = null, $email = null, $password)
         {
             // Initialiser la requête SQL
@@ -132,26 +156,33 @@
             // Requête SQL pour récupérer les scores d'un utilisateur
             $sql = "SELECT * FROM scores WHERE user_id = :user_id";
 
-            try {
-                // Préparer la requête
-                $stmt = $this->db->prepare($sql);
+            include("DBConnect.php");
 
-                // Lier le paramètre user_id
-                $stmt->bindValue(':user_id', $userId, PDO::PARAM_INT);
+            
 
-                // Exécuter la requête
-                $stmt->execute();
+            // try {
+            //     // Préparer la requête
+            //     $stmt = $this->db->prepare($sql);
 
-                // Récupérer tous les scores associés à l'utilisateur
-                $scores = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            //     // Lier le paramètre user_id
+            //     $stmt->bindValue(':user_id', $userId, PDO::PARAM_INT);
 
-                // Retourner les scores ou un tableau vide si aucun score n'est trouvé
-                return $scores ? $scores : [];
+            //     // Exécuter la requête
+            //     $stmt->execute();
 
-            } catch (PDOException $e) {
-                echo "Erreur lors de la recherche des scores : " . $e->getMessage();
-                return [];
-            }
+            //     // Récupérer tous les scores associés à l'utilisateur
+            //     $scores = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+            //     // Retourner les scores ou un tableau vide si aucun score n'est trouvé
+            //     return $scores ? $scores : [];
+
+          
+        
+
+            // } catch (PDOException $e) {
+            //     echo "Erreur lors de la recherche des scores : " . $e->getMessage();
+            //     return [];
+            // }
 
             // Appel de récupération d'un score pour ID 1
 
