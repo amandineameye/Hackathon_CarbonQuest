@@ -9,8 +9,7 @@ module.exports = {
    ],
    theme: {
       fontFamily: {
-         'logo': ['Bubbles', 'system-ui'],
-         'logo2': ['Matemasie', 'serif'],
+         'logo': ['Matemasie', 'serif'],
          'title': ['Josefin', 'sans-serif']
       },
 
