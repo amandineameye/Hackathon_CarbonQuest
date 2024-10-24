@@ -63,18 +63,9 @@ const HomePage = () => {
             <h2>Carbon Quest, quésaco ?</h2>
             <div>
               <p className="pb-4">
-                Carbon Quest est un jeu éducatif de plates-formes qui vous
-                invite à explorer les enjeux du Green IT. Le Green IT désigne
-                l’ensemble des pratiques visant à réduire l’impact
-                environnemental des technologies numériques, de leur conception
-                à leur utilisation.
+			  Carbon Quest est un jeu éducatif de plates-formes qui vous invite à explorer les enjeux du Green IT, l’ensemble des pratiques visant à réduire l’impact environnemental des technologies numériques, de leur conception à leur utilisation.
               </p>
-              <p className="pb-4">
-                Dans ce jeu, vous incarnez un avatar qui grimpe dans une forêt,
-                répondant à des questions sur ces pratiques écologiques. À la
-                fin de l'ascension, vous découvrirez un ciel reflétant votre
-                succès : sera-t-il radieux ou couvert de pollution numérique ?
-              </p>
+             
               <h3>But du jeu</h3>
               <p className="pb-4">
                 Votre mission est de grimper jusqu’au sommet de la canopée avant
@@ -88,12 +79,11 @@ const HomePage = () => {
               <h3>Comment jouer ?</h3>
               <ul className="pb-4">
                 <li>
-                  Dans Carbon Quest, utilisez les touches directionnelles pour
-                  déplacer votre avatar vers le haut de la forêt.
+				Utilisez les touches directionnelles pour déplacer votre avatar vers le haut de la forêt.
                 </li>
                 <li>
                   À chaque palier, un esprit de la forêt vous posera une
-                  question sur le Green IT.
+                  question.
                 </li>
                 <li>
                   Une mauvaise réponse ne vous empêche pas de continuer à
@@ -104,6 +94,7 @@ const HomePage = () => {
                   vos erreurs, et en apprendre davantage sur le Green IT.
                 </li>
               </ul>
+			  <p>Parviendrez-vous à réduire la pollution numérique ?</p>
               <button onClick={handleLoginModal} className="flex text-md font-semibold bg-title hover:bg-text-light transition-200 rounded-lg text-white px-5 py-2 transition-200 mx-auto mt-8">
                 Jouer
               </button>
