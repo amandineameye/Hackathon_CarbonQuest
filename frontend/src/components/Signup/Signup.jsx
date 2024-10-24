@@ -1,27 +1,73 @@
 import { useState } from "react";
+import axios from "axios";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
+import { useNavigate } from "react-router-dom";
 
-const Signup = ({ onSwitchToLogin }) => {
+const Signup = ({ onSwitchToLogin, onSuccessfulConnection }) => {
    const [showPassword, setShowPassword] = useState(false);
+
+   const [username, setUsername] = useState("");
+   const [email, setEmail] = useState("");
+   const [password, setPassword] = useState("");
+
+   const navigate = useNavigate();
+
+   const handleSubmit = async (e) => {
+      e.preventDefault();
+      const playerData = { username, email, password };
+      try {
+         // const response = await axios.post(
+         // 	`${process.env.REACT_APP_API_URL}/signup`,
+         // 	playerData,
+         // 	{
+         // 		headers: {
+         // 			"Content-Type": "application/json",
+         // 		},
+         // 	}
+         // );
+
+         // console.log("Inscription réussie:", response.data);
+         navigate("/game");
+         onSuccessfulConnection();
+         console.log("YOUHOU test réussi!");
+      } catch (error) {
+         // console.error(
+         // 	"Erreur lors de l’inscription:",
+         // 	error.response || error.message
+         // );
+      }
+   };
 
    return (
       <>
          <div className="px-8 pt-14 pb-8">
-            <h2 className="text-center">
-               Inscris-toi pour jouer
-            </h2>
-            <form className="flex flex-col gap-3">
+            <h2 className="text-center">Inscris-toi pour jouer</h2>
+            <form className="flex flex-col gap-3" onSubmit={handleSubmit}>
                <div>
                   <label htmlFor="username" className="input-label">
-                     Nom du joueur
+                     Pseudo
                   </label>
-                  <input id="username" type="text" className="input" />
+                  <input
+                     id="username"
+                     type="text"
+                     value={username}
+                     onChange={(e) => setUsername(e.target.value)}
+                     required
+                     className="input"
+                  />
                </div>
                <div>
                   <label htmlFor="email" className="input-label">
                      Email
                   </label>
-                  <input id="email" type="email" className="input" />
+                  <input
+                     id="email"
+                     type="email"
+                     value={email}
+                     onChange={(e) => setEmail(e.target.value)}
+                     required
+                     className="input"
+                  />
                </div>
                <div>
                   <label htmlFor="password" className="input-label">
@@ -32,6 +78,9 @@ const Signup = ({ onSwitchToLogin }) => {
                         className="input pr-8"
                         id="password"
                         type={showPassword ? "text" : "password"}
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
+                        required
                      />
                      {showPassword ? (
                         <FaEye
@@ -46,7 +95,10 @@ const Signup = ({ onSwitchToLogin }) => {
                      )}
                   </div>
                </div>
-               <button className="bg-text font-medium text-white py-1.5 rounded-lg mt-4 block w-full hover:bg-text-light transition-200">
+               <button
+                  className="bg-text font-medium text-white py-1.5 rounded-lg mt-4 block w-full hover:bg-text-light transition-200"
+                  type="submit"
+               >
                   Créer un compte
                </button>
             </form>
