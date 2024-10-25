@@ -3,6 +3,7 @@ import {
    AccordionHeader,
    AccordionPanel,
 } from "../../components/Accordion/Accordion";
+import { useState, useEffect } from 'react';
 import { useLocation } from "react-router-dom";
 
 const ResultsPage = () => {
@@ -17,7 +18,7 @@ const ResultsPage = () => {
    // Si le score est entre 9 et 10 (inclus) --> Green IT Guru, tu excelles le sujet !
 
    //    const score = 10;
-   
+
 
    useEffect(() => {
       const fetchScores = async () => {
@@ -33,7 +34,7 @@ const ResultsPage = () => {
 
 
    const userScores = allScores[username];
-   
+
    const result = () => {
       switch (true) {
          case score <= 4:
@@ -84,7 +85,7 @@ const ResultsPage = () => {
             return <div></div>;
       }
    };
-   // if userScores.lenght > 1 alors je montre
+
 
    return (
       <>
@@ -97,9 +98,18 @@ const ResultsPage = () => {
                </div>
             </div>
 
-            <div className="container text-center mt-12">
-               <h2>Tes précédents scores</h2>
-            </div>
+            {userScores && userScores.length > 1 && (
+               <div className="container text-center mt-12">
+                  <h2>Tes précédents scores</h2>
+                  <div className="flex justify-center gap-4">
+                     {/* Ici, il faut afficher les scores du tableau qu'on reçoit */}
+                     {userScores.slice(1).map(score => (
+                        <p className="rounded-full bg-text w-12 h-12 flex items-center justify-center text-white text-2xl font-semibold">{score}</p>
+                     ))}
+                  </div>
+                  {result()}
+               </div>
+            )}
 
             <div className="container py-16">
                <div className="py-2 px-6 bg-white rounded-lg w-9/12 mx-auto">
