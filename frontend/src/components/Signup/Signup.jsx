@@ -16,8 +16,6 @@ const Signup = ({ onSwitchToLogin, onSuccessfulConnection }) => {
       e.preventDefault();
       const playerData = { username, email, password };
       try {
-         console.log("SUBMIT - API URL >>>", process.env.REACT_APP_API_URL);
-
          const response = await axios.post(
          	`${process.env.REACT_APP_API_URL}/signup`,
          	playerData,
@@ -27,11 +25,17 @@ const Signup = ({ onSwitchToLogin, onSuccessfulConnection }) => {
          		},
          	}
          );
-
-         console.log("Inscription réussie:", response.data);
-         // navigate("/game");
-         // onSuccessfulConnection();
-         // console.log("YOUHOU test réussi!");
+         /**
+          * data.success = bool
+          * data.message = string
+         */
+         // création compte ok
+         if (response.data.success) {
+            console.log("Inscription réussie:", response.data);
+            navigate("/game");
+            onSuccessfulConnection();
+            console.log("YOUHOU test réussi!");
+         }
       } catch (error) {
          console.error(
          	"Erreur lors de l’inscription:",

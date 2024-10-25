@@ -27,6 +27,11 @@ const Login = ({ onSwitchToSignup, onSuccessfulConnection }) => {
 				}
 			);
 
+			/**
+			 * data.success = bool
+			 * data.message = string
+			 */
+			// création compte ok
 			if (response.data.success) {
 				// La réponse de l'API doit contenir un champ indiquant si la connexion a réussi (par exemple, response.data.success). Cette structure doit être gérée par les WAD
 				console.log("Connexion réussie:", response.data);
