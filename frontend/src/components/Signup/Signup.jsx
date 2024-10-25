@@ -104,10 +104,10 @@ const Signup = ({ onSwitchToLogin, onSuccessfulConnection }) => {
                         onClick={() => setShowPassword(!showPassword)}
                      />
                   )}
-                  {errors.password && (
-                     <span className="text-red-500">{errors.password.message}</span>
-                  )}
                </div>
+               {errors.password && (
+                  <span className="text-red-500">{errors.password.message}</span>
+               )}
             </div>
             <button
                className="bg-text font-medium text-white py-1.5 rounded-lg mt-4 block w-full hover:bg-text-light transition-200"
