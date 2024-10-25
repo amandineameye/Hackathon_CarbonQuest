@@ -7,6 +7,38 @@
 */
 
 // marche pas pour une obscure raison ??
+
+// require '../entity/Score.php';
+class Score {
+
+    private int $id;
+    private int $userId;
+    private int $value;
+
+    public function __construct($id, $userId, $value)
+    {
+        $this->id = $id;
+        $this->userId = $userId;
+        $this->value = $value;
+    }
+}
+// require '../entity/User.php';
+class User {
+
+    private int $id;
+    private string $username;
+    private string $email;
+    private string $password;
+
+    public function __construct($id, $username, $email, $password)
+    {
+        $this->id = $id;
+        $this->username = $username;
+        $this->email = $email;
+        $this->password = $password;
+    }
+}
+
 // require_once '../config/dbconfig.php';
 const DSN = "mysql:host=localhost;dbname=carbonquest;port=3306;charset=utf8";
 const USERNAME = "root";
@@ -22,8 +54,10 @@ function handleRequest($uri, $method) {
             verifyUser();
             break;
         case '/game' :
-            if ($method === 'POST') { addScore(); }
-            if ($method === 'GET') { getScores(); }
+            addScore();
+            break;
+        case '/scores' :
+            getScores();
             break;
         default:
             sendResponse(404, $uri);
@@ -157,16 +191,31 @@ function getScores() {
     } catch (Exception $e) {
         echo "Database Error : " . $e->getMessage();
     }
-    
+    // recup scores
     $sql = "SELECT * FROM score";
     $stmt = $cnx->prepare($sql);
     $stmt->execute();
-    $dbResponse = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    $scores = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    // recup users
+    $sql = "SELECT id, username FROM user";
+    $stmt = $cnx->prepare($sql);
+    $stmt->execute();
+    $users = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    // formatage réponse
+    $scoreboard = [];
+    foreach ($users as $user) {
+        $scoreboard[$user['username']] = [];
+        foreach ($scores as $score) {
+            if ($score['user_id'] == $user['id']) {
+                $scoreboard[$user['username']][] = $score['value'];
+            }
+        }
+    }
 
     if ($stmt->execute()) {
-        $data = ['success' => 1, 'message' => "Scores successfully retrived", 'scores' => $dbResponse];
+        $data = ['success' => 1, 'message' => "Scores successfully retrived", 'scores' => $scoreboard];
     } else {
-        $data = ['success' => 0, 'message' => "Failed to retrieve scores"];
+        $data = ['success' => 0, 'message' => "Failed to retrieve scores", 'scores' => null];
     }
     echo json_encode($data);
 }
