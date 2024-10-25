@@ -23,21 +23,21 @@ class Score {
     }
 }
 // require '../entity/User.php';
-class User {
+// class User {
 
-    private int $id;
-    private string $username;
-    private string $email;
-    private string $password;
+//     private int $id;
+//     private string $username;
+//     private string $email;
+//     private string $password;
 
-    public function __construct($id, $username, $email, $password)
-    {
-        $this->id = $id;
-        $this->username = $username;
-        $this->email = $email;
-        $this->password = $password;
-    }
-}
+//     public function __construct($id, $username, $email, $password)
+//     {
+//         $this->id = $id;
+//         $this->username = $username;
+//         $this->email = $email;
+//         $this->password = $password;
+//     }
+// }
 
 // require_once '../config/dbconfig.php';
 const DSN = "mysql:host=localhost;dbname=carbonquest;port=3306;charset=utf8";
@@ -140,22 +140,33 @@ function addScore() {
         echo "Database Error : " . $e->getMessage();
     }
     // vérifier ce qu'on reçoit quand mis en place
-    $score = json_decode(file_get_contents('php://input'));
+    $gameEnd = json_decode(file_get_contents('php://input'));
 
-    // vérification si score déjà existant
-    // gros doute sur le SQL, il est 2h du mat
+    // prevent bug no username send ?
+    // récupération users
+    $sql = "SELECT id, username FROM user";
+    $stmt = $cnx->prepare($sql);
+    $stmt->execute();
+    $users = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+    $usersId = [];
+    foreach($users as $user){
+        $usersId[$user['username']] = $user['id'];
+    }
+
+    // vérification score déjà enregistré 
     $sql = "SELECT * FROM score WHERE user_id=:userId";
     $stmt = $cnx->prepare($sql);
-    // $stmt->bindValue(':userId', );
+    $stmt->bindValue(':userId', $usersId[$gameEnd->username]);
     $stmt->execute();
-    $dbResponse = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    $scores = $stmt->fetchAll(PDO::FETCH_ASSOC);
     
-    if (empty($dbResponse)) {
+    if (count($scores) < 3) {
         // insertion nouveau score
-        $sql = "INSERT INTO score (user_id, value) VALUES (:userID, :value)";
+        $sql = "INSERT INTO score (user_id, value) VALUES (:userId, :value)";
         $stmt = $cnx->prepare($sql);
-        // $stmt->bindValue(':userID', );
-        // $stmt->bindValue(':value', );
+        $stmt->bindValue(':userId', $usersId[$gameEnd->username]);
+        $stmt->bindValue(':value', $gameEnd->value);
         
         if ($stmt->execute()) {
             $data = ['success' => 1, 'message' => "New score successfully created"];
@@ -164,11 +175,17 @@ function addScore() {
         }
     } else {
         // nouveau record
-        if ($score > $dbResponse[0]['id']) {
+        $arrayScores = [];
+        foreach ($scores as $score) {
+            $arrayScores[] = $score['value'];
+        }
+        // flemme de faire test pour 3
+        // à mieux faire
+        if ($gameEnd->value > $scores[0]['id']) {
             $sql = "UPDATE score SET value=:value WHERE id=:id";
             $stmt = $cnx->prepare($sql);
-            // $stmt->bindValue(':value', );
-            $stmt->bindValue(':id', $dbResponse[0]['id']);
+            $stmt->bindValue(':value', $gameEnd->value);
+            $stmt->bindValue(':id', $scores[0]['id']);
             
             if ($stmt->execute()) {
                 $data = ['success' => 1, 'message' => "Player best score successfully updated"];
@@ -209,6 +226,9 @@ function getScores() {
             if ($score['user_id'] == $user['id']) {
                 $scoreboard[$user['username']][] = $score['value'];
             }
+        }
+        if (empty($scoreboard[$user['username']])) {
+            unset($scoreboard[$user['username']]);
         }
     }
 
