@@ -2,6 +2,7 @@ import { Unity, useUnityContext } from "react-unity-webgl";
 import { useEffect, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import { useLocation } from "react-router-dom";
 
 const GamePage = () => {
 	const { unityProvider, addEventListener, removeEventListener } =
@@ -13,6 +14,9 @@ const GamePage = () => {
 		});
 	const navigate = useNavigate();
 
+	const location = useLocation();
+   const username = location.state?.username; 
+
 	const handleEndGame = useCallback(
 		async (score, falseAnswers) => {
 			console.log("La partie est finie. Le score est de " + score);
@@ -23,7 +27,7 @@ const GamePage = () => {
 			try {
 				const response = await axios.post(
 					`${process.env.REACT_APP_API_URL}/game`,
-					{ score },
+					{ score, username },
 					{
 						headers: {
 							"Content-Type": "application/json",
@@ -39,7 +43,7 @@ const GamePage = () => {
 			} catch (error) {
 				console.error("Erreur lors de l'envoi du score à l'API:", error);
 			}
-			navigate("/results", { state: { score, falseAnswers } });
+			navigate("/results", { state: { score, falseAnswers, username } });
 		},
 		[navigate]
 	);

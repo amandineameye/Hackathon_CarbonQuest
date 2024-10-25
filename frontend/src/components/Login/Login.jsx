@@ -35,7 +35,7 @@ const Login = ({ onSwitchToSignup, onSuccessfulConnection }) => {
          if (response.data.success) {
             // La réponse de l'API doit contenir un champ indiquant si la connexion a réussi (par exemple, response.data.success). Cette structure doit être gérée par les WAD
             console.log("Connexion réussie:", response.data);
-            navigate("/game");
+			navigate("/game", { state: { username } });
             onSuccessfulConnection();
          } else {
             setErrorMessage("Identifiants incorrects.");
