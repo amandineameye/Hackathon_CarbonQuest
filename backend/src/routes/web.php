@@ -9,19 +9,19 @@
 // marche pas pour une obscure raison ??
 
 // require '../entity/Score.php';
-class Score {
+// class Score {
 
-    private int $id;
-    private int $userId;
-    private int $value;
+//     private int $id;
+//     private int $userId;
+//     private int $value;
 
-    public function __construct($id, $userId, $value)
-    {
-        $this->id = $id;
-        $this->userId = $userId;
-        $this->value = $value;
-    }
-}
+//     public function __construct($id, $userId, $value)
+//     {
+//         $this->id = $id;
+//         $this->userId = $userId;
+//         $this->value = $value;
+//     }
+// }
 // require '../entity/User.php';
 // class User {
 
@@ -42,7 +42,8 @@ class Score {
 // require_once '../config/dbconfig.php';
 const DSN = "mysql:host=localhost;dbname=carbonquest;port=3306;charset=utf8";
 const USERNAME = "root";
-const PASSWORD = "";
+const PASSWORD = "";    // version XAMPP
+// const PASSWORD = "root";    // version MAMP
 
 // routeur
 function handleRequest($uri, $method) {
@@ -66,16 +67,30 @@ function handleRequest($uri, $method) {
 }
 
 // gestion requêtes
-function addUser() {
+// schéma réponse (aide en cas de 404)
+function sendResponse($status, $body) {
+    http_response_code($status);
+    header('Content-Type: application/json');
+    echo $body;
+}
+
+function connect() {
     try{
         $cnx = new PDO(DSN, USERNAME, PASSWORD);
         $cnx->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     } catch (Exception $e) {
         echo "Database Error : " . $e->getMessage();
     }
+    return $cnx;
+}
+
+function addUser() {
+    // connection db
+    $cnx = connect();
+
     // récupération données
     $user = json_decode(file_get_contents('php://input'));
-
+    
     // vérification compte existant
     $sql = "SELECT * FROM user WHERE email=:email";
     $stmt = $cnx->prepare($sql);
@@ -103,12 +118,9 @@ function addUser() {
 }
 
 function verifyUser() {
-    try{
-        $cnx = new PDO(DSN, USERNAME, PASSWORD);
-        $cnx->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    } catch (Exception $e) {
-        echo "Database Error : " . $e->getMessage();
-    }
+    // connection db
+    $cnx = connect();
+
     // récupération données
     $user = json_decode(file_get_contents('php://input'));
 
@@ -133,12 +145,9 @@ function verifyUser() {
 
 // besoin de voir ce qu'on reçoit
 function addScore() {
-    try{
-        $cnx = new PDO(DSN, USERNAME, PASSWORD);
-        $cnx->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    } catch (Exception $e) {
-        echo "Database Error : " . $e->getMessage();
-    }
+    // connection db
+    $cnx = connect();
+
     // vérifier ce qu'on reçoit quand mis en place
     $gameEnd = json_decode(file_get_contents('php://input'));
 
@@ -202,12 +211,9 @@ function addScore() {
 
 // trouver où appelé pour tester
 function getScores() {
-    try{
-        $cnx = new PDO(DSN, USERNAME, PASSWORD);
-        $cnx->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    } catch (Exception $e) {
-        echo "Database Error : " . $e->getMessage();
-    }
+    // connection db
+    $cnx = connect();
+
     // recup scores
     $sql = "SELECT * FROM score";
     $stmt = $cnx->prepare($sql);
@@ -238,11 +244,4 @@ function getScores() {
         $data = ['success' => 0, 'message' => "Failed to retrieve scores", 'scores' => null];
     }
     echo json_encode($data);
-}
-
-// schéma réponse (aide en cas de 404)
-function sendResponse($status, $body) {
-    http_response_code($status);
-    header('Content-Type: application/json');
-    echo $body;
 }
