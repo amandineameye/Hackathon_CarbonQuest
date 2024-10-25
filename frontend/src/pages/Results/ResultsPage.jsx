@@ -119,9 +119,7 @@ const ResultsPage = () => {
                         1. L’optimisation des images sur un site web peut réduire la consommation de bande passante et d’énergie.
                      </AccordionHeader>
                      <AccordionPanel>
-                        <p className="flex w-fit font-medium mb-2 bg-[#dfe8ae] p-2 rounded-sm">
-                           Vrai
-                        </p>
+                        <p>Vrai</p>
                         <p className="mb-2">
                            Des images optimisées chargent plus rapidement et consomment moins de données, ce qui réduit la consommation d'énergie liée à la navigation web.
                         </p>
@@ -140,9 +138,7 @@ const ResultsPage = () => {
                         améliore la performance et réduit la consommation de données.
                      </AccordionHeader>
                      <AccordionPanel>
-                        <p className="flex w-fit font-medium mb-2 bg-[#dfe8ae] p-2 rounded-sm">
-                           Faux
-                        </p>
+                        <p>Faux</p>
                         <p className="mb-2">
                            Précharger trop de ressources peut en réalité surcharger le
                            navigateur et consommer des ressources inutiles, entraînant
@@ -166,9 +162,7 @@ const ResultsPage = () => {
                         environnemental.
                      </AccordionHeader>
                      <AccordionPanel>
-                        <p className="flex w-fit font-medium mb-2 bg-[#dfe8ae] p-2 rounded-sm">
-                           Vrai
-                        </p>
+                        <p>Vrai</p>
                         <p className="mb-2">
                            Charger les polices localement ou de manière asynchrone permet
                            de réduire le nombre de requêtes serveur et d’améliorer les
@@ -189,9 +183,7 @@ const ResultsPage = () => {
                         4. Le choix des serveurs d’hébergement n'a pas d’impact significatif sur l’empreinte carbone d’un service numérique.
                      </AccordionHeader>
                      <AccordionPanel>
-                        <p className="flex w-fit font-medium mb-2 bg-[#dfe8ae] p-2 rounded-sm">
-                           Faux
-                        </p>
+                        <p>Faux</p>
                         <p className="mb-2">
                            Les serveurs verts ou à faible consommation énergétique peuvent réduire significativement les émissions de CO2 d’un service numérique.
                         </p>
@@ -209,9 +201,7 @@ const ResultsPage = () => {
                         5. Un site web en ligne 24h/24 ne consomme pas d'énergie tant qu'aucun utilisateur ne l'utilise.
                      </AccordionHeader>
                      <AccordionPanel>
-                        <p className="flex w-fit font-medium mb-2 bg-[#dfe8ae] p-2 rounded-sm">
-                           Faux
-                        </p>
+                        <p>Faux</p>
                         <p className="mb-2">
                            Même sans trafic, les serveurs qui hébergent le site continuent de consommer de l’énergie pour maintenir le service actif.
                         </p>
@@ -227,9 +217,7 @@ const ResultsPage = () => {
                         6. Les services numériques contribuent peu aux émissions globales de gaz à effet de serre.
                      </AccordionHeader>
                      <AccordionPanel>
-                        <p className="flex w-fit font-medium mb-2 bg-[#dfe8ae] p-2 rounded-sm">
-                           Faux
-                        </p>
+                        <p>Faux</p>
                         <p className="mb-2">
                            Le secteur du numérique représente environ 4% des émissions mondiales de gaz à effet de serre, un chiffre qui continue de croître.
                         </p>
@@ -249,9 +237,7 @@ const ResultsPage = () => {
                         utilisateur.
                      </AccordionHeader>
                      <AccordionPanel>
-                        <p className="flex w-fit font-medium mb-2 bg-[#dfe8ae] p-2 rounded-sm">
-                           Vrai
-                        </p>
+                        <p>Vrai</p>
                         <p className="mb-2">
                            Les animations et les vidéos en lecture automatique consomment
                            beaucoup de bande passante et nécessitent davantage de
@@ -273,9 +259,7 @@ const ResultsPage = () => {
                         complexes aide à réduire l'empreinte carbone des sites web.
                      </AccordionHeader>
                      <AccordionPanel>
-                        <p className="flex w-fit font-medium mb-2 bg-[#dfe8ae] p-2 rounded-sm">
-                           Vrai
-                        </p>
+                        <p>Vrai</p>
                         <p className="mb-2">
                            Les frameworks légers nécessitent moins de ressources pour
                            être exécutés, réduisant ainsi l’énergie consommée par les
@@ -296,9 +280,7 @@ const ResultsPage = () => {
                         9. L’utilisation du mode sombre sur les sites web réduit la consommation d’énergie sur tous les appareils.
                      </AccordionHeader>
                      <AccordionPanel>
-                        <p className="flex w-fit font-medium mb-2 bg-[#dfe8ae] p-2 rounded-sm">
-                           Faux
-                        </p>
+                        <p>Faux</p>
                         <p className="mb-2">
                            Le mode sombre économise de l’énergie surtout sur les écrans OLED, mais l’impact est moindre sur les écrans LCD.
                         </p>
@@ -316,9 +298,7 @@ const ResultsPage = () => {
                         10. Le recyclage des appareils électroniques permet de réduire les impacts négatifs du numérique sur l’environnement.
                      </AccordionHeader>
                      <AccordionPanel>
-                        <p className="flex w-fit font-medium mb-2 bg-[#dfe8ae] p-2 rounded-sm">
-                           Vrai
-                        </p>
+                        <p>Vrai</p>
                         <p className="mb-2">
                            Recycler les appareils réduit la quantité de matières premières nécessaires à la fabrication de nouveaux équipements, limitant ainsi les impacts environnementaux.
                         </p>

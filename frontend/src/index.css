@@ -48,4 +48,11 @@
    h3 {
       @apply text-xl text-title font-semibold font-title mb-3 mt-2;
    }
+   .resTrue {
+      @apply flex w-fit font-medium mb-2 bg-[#d5e5cd] p-2 rounded-sm;
+   }
+
+   .resFalse {
+      @apply flex w-fit font-medium mb-2 bg-[#f3d7d5] p-2 rounded-sm;
+   }
 }
