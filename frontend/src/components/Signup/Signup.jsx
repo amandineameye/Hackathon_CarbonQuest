@@ -19,6 +19,7 @@ const UserSchema = z.object({
 });
 
 
+
 const Signup = ({ onSwitchToLogin, onSuccessfulConnection }) => {
    const [showPassword, setShowPassword] = useState(false);
    const navigate = useNavigate();
@@ -37,7 +38,7 @@ const Signup = ({ onSwitchToLogin, onSuccessfulConnection }) => {
 
          if (response.data.success) {
             console.log("Inscription réussie:", response.data);
-            navigate("/game");
+            navigate("/game", { state: { username: data.username } });
             onSuccessfulConnection();
          }
       } catch (error) {
