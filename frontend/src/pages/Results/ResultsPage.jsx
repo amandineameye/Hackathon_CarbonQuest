@@ -7,7 +7,8 @@ import { useLocation } from "react-router-dom";
 
 const ResultsPage = () => {
    const location = useLocation();
-   const { score, falseAnswers } = location.state || {};
+   const { score, falseAnswers, username } = location.state || {};
+   const [allScores, setAllScores] = useState([]);
 
    //? Pour tester
    // Si le score est entre 0 et 4 --> Nouveau-né du Green IT, tu commences à décourvir le sujet.
@@ -16,8 +17,23 @@ const ResultsPage = () => {
    // Si le score est entre 9 et 10 (inclus) --> Green IT Guru, tu excelles le sujet !
 
    //    const score = 10;
+   
+
+   useEffect(() => {
+      const fetchScores = async () => {
+         try {
+            const response = await axios.get(`${process.env.REACT_APP_API_URL}/scores`);
+            setAllScores(response.data);  // assuming response.data contains an array of scores
+         } catch (error) {
+            console.error("Error fetching scores:", error);
+         }
+      };
+      fetchScores();
+   }, []);
 
 
+   const userScores = allScores[username];
+   
    const result = () => {
       switch (true) {
          case score <= 4:
