@@ -14,7 +14,6 @@ const PASSWORD = "";
 
 // routeur
 function handleRequest($uri, $method) {
-    // str_replace('/public', '', $uri);
     switch ($uri) {
         case '/signup':
             addUser();
@@ -86,7 +85,7 @@ function verifyUser() {
     $stmt->execute();
     $dbResponse = $stmt->fetchAll(PDO::FETCH_ASSOC);
     
-    if (!empty($existing)) {
+    if (empty($dbResponse)) {
         $data = ['success' => 0, 'message' => "Invalid login info"];
     } else {
         if (password_verify($user->password, $dbResponse[0]['password'])) {
@@ -169,6 +168,7 @@ function getScores() {
     } else {
         $data = ['success' => 0, 'message' => "Failed to retrieve scores"];
     }
+    echo json_encode($data);
 }
 
 // schéma réponse (aide en cas de 404)
