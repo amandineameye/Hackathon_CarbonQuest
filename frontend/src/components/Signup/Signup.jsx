@@ -59,6 +59,7 @@ const Signup = ({ onSwitchToLogin, onSuccessfulConnection }) => {
                   {...register('username')}
                   required
                   className="input"
+                  placeholder='max. 10 caractères'
                />
                {errors.username && (
                   <span className="text-red-500">{errors.username.message}</span>
@@ -74,7 +75,6 @@ const Signup = ({ onSwitchToLogin, onSuccessfulConnection }) => {
                   {...register('email')}
                   required
                   className="input"
-                  placeholder='max.10 caractères'
                />
                {errors.email && (
                   <span className="text-red-500">{errors.email.message}</span>
