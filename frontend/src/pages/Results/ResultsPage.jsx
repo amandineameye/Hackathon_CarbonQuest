@@ -3,8 +3,6 @@ import {
    AccordionHeader,
    AccordionPanel,
 } from "../../components/Accordion/Accordion";
-import { FaChevronDown } from "react-icons/fa6";
-import { FaChevronUp } from "react-icons/fa6";
 import { useLocation } from "react-router-dom";
 
 const ResultsPage = () => {
@@ -70,6 +68,7 @@ const ResultsPage = () => {
             return <div></div>;
       }
    };
+   // if userScores.lenght > 1 alors je montre
 
    return (
       <>
@@ -80,6 +79,10 @@ const ResultsPage = () => {
                   <h2>Ton score</h2>
                   {result()}
                </div>
+            </div>
+
+            <div className="container text-center mt-12">
+               <h2>Tes précédents scores</h2>
             </div>
 
             <div className="container py-16">
@@ -98,6 +101,7 @@ const ResultsPage = () => {
                         <a
                            className="flex justify-self-end mb-3 cursor-pointer font-semibold text-custom-pink hover:text-custom-purple underline"
                            href="https://gr491.isit-europe.org/crit.php?id=9-5062-frontend-les-services-utilisent-plusieurs-tailles-dune-meme"
+                           target="_blank"
                         >
                            Plus d'infos
                         </a>
@@ -122,6 +126,7 @@ const ResultsPage = () => {
                         <a
                            className="flex justify-self-end mb-3 cursor-pointer font-semibold text-custom-pink hover:text-custom-purple underline"
                            href="https://gr491.isit-europe.org/crit.php?id=3-7041-backend-les-echanges-indispensables-doivent-permettre-de-reduire"
+                           target="_blank"
                         >
                            Plus d'infos
                         </a>
@@ -146,6 +151,7 @@ const ResultsPage = () => {
                         <a
                            className="flex justify-self-end mb-3 cursor-pointer font-semibold text-custom-pink hover:text-custom-purple underline"
                            href="https://gr491.isit-europe.org/crit.php?id=8-3058-uxui-les-polices-de-caracteres-peuvent-etre-tres"
+                           target="_blank"
                         >
                            Plus d'infos
                         </a>
@@ -165,6 +171,7 @@ const ResultsPage = () => {
                         <a
                            className="flex justify-self-end mb-3 cursor-pointer font-semibold text-custom-pink hover:text-custom-purple underline"
                            href="https://gr491.isit-europe.org/crit.php?id=1-8017-hebergement-le-domaine-de-lhebergement-se-struture-pour"
+                           target="_blank"
                         >
                            Plus d'infos
                         </a>
@@ -182,7 +189,8 @@ const ResultsPage = () => {
                            Même sans trafic, les serveurs qui hébergent le site continuent de consommer de l’énergie pour maintenir le service actif.
                         </p>
                         <a className="flex justify-self-end mb-3 cursor-pointer font-semibold text-custom-pink hover:text-custom-purple underline"
-                           href="#">
+                           href="https://gr491.isit-europe.org/?famille=hebergement"
+                           target="_blank">
                            Plus d'infos
                         </a>
                      </AccordionPanel>
@@ -200,7 +208,8 @@ const ResultsPage = () => {
                         </p>
                         <a
                            className="flex justify-self-end mb-3 cursor-pointer font-semibold text-custom-pink hover:text-custom-purple underline"
-                           href="#"
+                           href="https://www.greenit.fr/etude-empreinte-environnementale-du-numerique-mondial/"
+                           target="_blank"
                         >
                            Plus d'infos
                         </a>
@@ -225,6 +234,7 @@ const ResultsPage = () => {
                         <a
                            className="flex justify-self-end mb-3 cursor-pointer font-semibold text-custom-pink hover:text-custom-purple underline"
                            href="https://gr491.isit-europe.org/crit.php?id=5-3029-uxui-des-elements/composants-visuels-sonores-et-tactiles-peuvent"
+                           target="_blank"
                         >
                            Plus d'infos
                         </a>
@@ -247,7 +257,8 @@ const ResultsPage = () => {
                         </p>
                         <a
                            className="flex justify-self-end mb-3 cursor-pointer font-semibold text-custom-pink hover:text-custom-purple underline"
-                           href="https://gr491.isit-europe.org/crit.php?id=1-8017-hebergement-le-domaine-de-lhebergement-se-struture-pour"
+                           href="https://gr491.isit-europe.org/crit.php?id=3-5019-frontend-bien-souvent-les-composants-issus-de-bibliotheques"
+                           target="_blank"
                         >
                            Plus d'infos
                         </a>
@@ -267,6 +278,7 @@ const ResultsPage = () => {
                         <a
                            className="flex justify-self-end mb-3 cursor-pointer font-semibold text-custom-pink hover:text-custom-purple underline"
                            href="#"
+                           target="_blank"
                         >
                            Plus d'infos
                         </a>
@@ -285,7 +297,8 @@ const ResultsPage = () => {
                         </p>
                         <a
                            className="flex justify-self-end mb-3 cursor-pointer font-semibold text-custom-pink hover:text-custom-purple underline"
-                           href="#"
+                           href="https://gr491.isit-europe.org/search.php?search=recyclage&go=Rechercher&famille=hebergement&inc="
+                           target="_blank"
                         >
                            Plus d'infos
                         </a>
