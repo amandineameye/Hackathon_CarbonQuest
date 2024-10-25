@@ -5,6 +5,7 @@ import {
 } from "../../components/Accordion/Accordion";
 import { useState, useEffect } from 'react';
 import { useLocation } from "react-router-dom";
+import axios from "axios";
 
 const ResultsPage = () => {
    const location = useLocation();

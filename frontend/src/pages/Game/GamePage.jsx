@@ -18,11 +18,11 @@ const GamePage = () => {
    const username = location.state?.username; 
 
 	const handleEndGame = useCallback(
-		async (score, falseAnswers) => {
+		async (score, answers) => {
 			console.log("La partie est finie. Le score est de " + score);
 			console.log(
-				"Le joueur a mal répondu aux questions :" +
-					(falseAnswers?.length ? falseAnswers.join(",") : "aucune")
+				"Réponses du joueur :" +
+					(answers?.length ? answers.join(",") : "aucune")
 			);
 			try {
 				const response = await axios.post(
@@ -43,7 +43,7 @@ const GamePage = () => {
 			} catch (error) {
 				console.error("Erreur lors de l'envoi du score à l'API:", error);
 			}
-			navigate("/results", { state: { score, falseAnswers, username } });
+			navigate("/results", { state: { score, answers, username } });
 		},
 		[navigate]
 	);
