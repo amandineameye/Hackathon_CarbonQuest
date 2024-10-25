@@ -1,0 +1,1 @@
+En plus de lancer Apache et MySQL dans XAMPP, lancer serveur local dans /backend avec `php -S localhost:8000`

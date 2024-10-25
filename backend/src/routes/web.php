@@ -6,7 +6,7 @@
  *  -> rajouter require_once '../controllers/nomcontroller.php';
 */
 
-// not working for some reason ??
+// marche pas pour une obscure raison ??
 // require_once '../config/dbconfig.php';
 const DSN = "mysql:host=localhost;dbname=carbonquest;port=3306;charset=utf8";
 const USERNAME = "root";
@@ -17,13 +17,14 @@ function handleRequest($uri, $method) {
     // str_replace('/public', '', $uri);
     switch ($uri) {
         case '/signup':
-            createUser();
+            addUser();
             break;
         case '/login':
             verifyUser();
             break;
         case '/game' :
-            // fonction
+            if ($method === 'POST') { addScore(); }
+            if ($method === 'GET') { getScores(); }
             break;
         default:
             sendResponse(404, $uri);
@@ -32,7 +33,7 @@ function handleRequest($uri, $method) {
 }
 
 // gestion requêtes
-function createUser() {
+function addUser() {
     try{
         $cnx = new PDO(DSN, USERNAME, PASSWORD);
         $cnx->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
@@ -97,7 +98,80 @@ function verifyUser() {
     echo json_encode($data);
 }
 
-// Helper function to send responses
+// besoin de voir ce qu'on reçoit
+function addScore() {
+    try{
+        $cnx = new PDO(DSN, USERNAME, PASSWORD);
+        $cnx->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    } catch (Exception $e) {
+        echo "Database Error : " . $e->getMessage();
+    }
+    // vérifier ce qu'on reçoit quand mis en place
+    $score = json_decode(file_get_contents('php://input'));
+
+    // vérification si score déjà existant
+    // gros doute sur le SQL, il est 2h du mat
+    $sql = "SELECT * FROM score WHERE user_id=:userId";
+    $stmt = $cnx->prepare($sql);
+    // $stmt->bindValue(':userId', );
+    $stmt->execute();
+    $dbResponse = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    
+    if (empty($dbResponse)) {
+        // insertion nouveau score
+        $sql = "INSERT INTO score (user_id, value) VALUES (:userID, :value)";
+        $stmt = $cnx->prepare($sql);
+        // $stmt->bindValue(':userID', );
+        // $stmt->bindValue(':value', );
+        
+        if ($stmt->execute()) {
+            $data = ['success' => 1, 'message' => "New score successfully created"];
+        } else {
+            $data = ['success' => 0, 'message' => "Failed to create new score"];
+        }
+    } else {
+        // nouveau record
+        if ($score > $dbResponse[0]['id']) {
+            $sql = "UPDATE score SET value=:value WHERE id=:id";
+            $stmt = $cnx->prepare($sql);
+            // $stmt->bindValue(':value', );
+            $stmt->bindValue(':id', $dbResponse[0]['id']);
+            
+            if ($stmt->execute()) {
+                $data = ['success' => 1, 'message' => "Player best score successfully updated"];
+            } else {
+                $data = ['success' => 0, 'message' => "Failed to update player best score"];
+            }
+
+        } else {
+            $data = ['success' => 1, 'message' => "Better score already saved, new score ignored"];
+        }
+    }
+    echo json_encode($data);
+}
+
+// trouver où appelé pour tester
+function getScores() {
+    try{
+        $cnx = new PDO(DSN, USERNAME, PASSWORD);
+        $cnx->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    } catch (Exception $e) {
+        echo "Database Error : " . $e->getMessage();
+    }
+    
+    $sql = "SELECT * FROM score";
+    $stmt = $cnx->prepare($sql);
+    $stmt->execute();
+    $dbResponse = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+    if ($stmt->execute()) {
+        $data = ['success' => 1, 'message' => "Scores successfully retrived", 'scores' => $dbResponse];
+    } else {
+        $data = ['success' => 0, 'message' => "Failed to retrieve scores"];
+    }
+}
+
+// schéma réponse (aide en cas de 404)
 function sendResponse($status, $body) {
     http_response_code($status);
     header('Content-Type: application/json');
