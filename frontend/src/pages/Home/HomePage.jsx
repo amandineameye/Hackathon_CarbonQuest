@@ -76,9 +76,8 @@ const HomePage = () => {
 
                      <h3>But du jeu</h3>
                      <p className="pb-4">
-                        Votre mission est de grimper jusqu’au sommet de la canopée avant
-                        la fin du temps imparti, tout en répondant correctement à un
-                        maximum de questions. Votre score final influence l’état du
+                        Votre mission est de grimper jusqu’au sommet de la canopée,
+                        tout en répondant correctement aux différentes questions. Votre score final influence l’état du
                         ciel, que vous ne découvrirez qu’une fois arrivés en haut. Un
                         ciel dégagé est le signe de bonnes réponses, tandis qu’un ciel
                         sombre reflète des erreurs accumulées.
