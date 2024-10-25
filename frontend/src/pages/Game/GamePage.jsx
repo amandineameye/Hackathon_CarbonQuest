@@ -49,9 +49,9 @@
 //   );
 
 //   useEffect(() => {
-//     addEventListener("EndGame", handleEndGame);
+//     addEventListener("ButtonClicked", handleEndGame);
 //     return () => {
-//       removeEventListener("EndGame", handleEndGame);
+//       removeEventListener("ButtonClicked", handleEndGame);
 //     };
 //   }, [addEventListener, removeEventListener, handleEndGame]);
 
@@ -149,9 +149,9 @@ const GamePage = () => {
   }, [username]);
 
   useEffect(() => {
-    addEventListener("EndGame", handleEndGame);
+    addEventListener("ButtonClicked", handleEndGame);
     return () => {
-      removeEventListener("EndGame", handleEndGame);
+      removeEventListener("ButtonClicked", handleEndGame);
     };
   }, [addEventListener, removeEventListener, handleEndGame]);
 

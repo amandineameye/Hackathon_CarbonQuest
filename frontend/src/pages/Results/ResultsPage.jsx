@@ -9,8 +9,13 @@ import axios from "axios";
 
 const ResultsPage = () => {
    const location = useLocation();
-   const { score, falseAnswers, username } = location.state || {};
+   const { score, answers, username } = location.state || {};
    const [allScores, setAllScores] = useState([]);
+   const rightAnswers = [true, false, true, false, false, false, true, true, false, true];
+
+   const evaluatedAnswers = answers.map((answer, index) => 
+      answer === rightAnswers[index] ? "correct" : "wrong"
+    );
 
    //? Pour tester
    // Si le score est entre 0 et 4 --> Nouveau-né du Green IT, tu commences à décourvir le sujet.
@@ -119,7 +124,10 @@ const ResultsPage = () => {
                         1. L’optimisation des images sur un site web peut réduire la consommation de bande passante et d’énergie.
                      </AccordionHeader>
                      <AccordionPanel>
-                        <p className="flex w-fit font-medium mb-2 bg-[#dfe8ae] p-2 rounded-sm">
+                        <p 
+                        className={evaluatedAnswers[0] === "correct" ? "resTrue" : "resFalse"}
+                        
+                        >
                            Vrai
                         </p>
                         <p className="mb-2">
@@ -140,7 +148,7 @@ const ResultsPage = () => {
                         améliore la performance et réduit la consommation de données.
                      </AccordionHeader>
                      <AccordionPanel>
-                        <p className="flex w-fit font-medium mb-2 bg-[#dfe8ae] p-2 rounded-sm">
+                        <p className={evaluatedAnswers[1] === "correct" ? "resTrue" : "resFalse"}>
                            Faux
                         </p>
                         <p className="mb-2">
@@ -166,7 +174,7 @@ const ResultsPage = () => {
                         environnemental.
                      </AccordionHeader>
                      <AccordionPanel>
-                        <p className="flex w-fit font-medium mb-2 bg-[#dfe8ae] p-2 rounded-sm">
+                        <p className={evaluatedAnswers[2] === "correct" ? "resTrue" : "resFalse"}>
                            Vrai
                         </p>
                         <p className="mb-2">
@@ -189,7 +197,7 @@ const ResultsPage = () => {
                         4. Le choix des serveurs d’hébergement n'a pas d’impact significatif sur l’empreinte carbone d’un service numérique.
                      </AccordionHeader>
                      <AccordionPanel>
-                        <p className="flex w-fit font-medium mb-2 bg-[#dfe8ae] p-2 rounded-sm">
+                        <p className={evaluatedAnswers[3] === "correct" ? "resTrue" : "resFalse"}>
                            Faux
                         </p>
                         <p className="mb-2">
@@ -209,7 +217,7 @@ const ResultsPage = () => {
                         5. Un site web en ligne 24h/24 ne consomme pas d'énergie tant qu'aucun utilisateur ne l'utilise.
                      </AccordionHeader>
                      <AccordionPanel>
-                        <p className="flex w-fit font-medium mb-2 bg-[#dfe8ae] p-2 rounded-sm">
+                        <p className={evaluatedAnswers[4] === "correct" ? "resTrue" : "resFalse"}>
                            Faux
                         </p>
                         <p className="mb-2">
@@ -227,7 +235,7 @@ const ResultsPage = () => {
                         6. Les services numériques contribuent peu aux émissions globales de gaz à effet de serre.
                      </AccordionHeader>
                      <AccordionPanel>
-                        <p className="flex w-fit font-medium mb-2 bg-[#dfe8ae] p-2 rounded-sm">
+                        <p className={evaluatedAnswers[5] === "correct" ? "resTrue" : "resFalse"}>
                            Faux
                         </p>
                         <p className="mb-2">
@@ -249,7 +257,7 @@ const ResultsPage = () => {
                         utilisateur.
                      </AccordionHeader>
                      <AccordionPanel>
-                        <p className="flex w-fit font-medium mb-2 bg-[#dfe8ae] p-2 rounded-sm">
+                        <p className={evaluatedAnswers[6] === "correct" ? "resTrue" : "resFalse"}>
                            Vrai
                         </p>
                         <p className="mb-2">
@@ -273,7 +281,7 @@ const ResultsPage = () => {
                         complexes aide à réduire l'empreinte carbone des sites web.
                      </AccordionHeader>
                      <AccordionPanel>
-                        <p className="flex w-fit font-medium mb-2 bg-[#dfe8ae] p-2 rounded-sm">
+                        <p className={evaluatedAnswers[7] === "correct" ? "resTrue" : "resFalse"}>
                            Vrai
                         </p>
                         <p className="mb-2">
@@ -296,7 +304,7 @@ const ResultsPage = () => {
                         9. L’utilisation du mode sombre sur les sites web réduit la consommation d’énergie sur tous les appareils.
                      </AccordionHeader>
                      <AccordionPanel>
-                        <p className="flex w-fit font-medium mb-2 bg-[#dfe8ae] p-2 rounded-sm">
+                        <p className={evaluatedAnswers[8] === "correct" ? "resTrue" : "resFalse"}>
                            Faux
                         </p>
                         <p className="mb-2">
@@ -316,7 +324,7 @@ const ResultsPage = () => {
                         10. Le recyclage des appareils électroniques permet de réduire les impacts négatifs du numérique sur l’environnement.
                      </AccordionHeader>
                      <AccordionPanel>
-                        <p className="flex w-fit font-medium mb-2 bg-[#dfe8ae] p-2 rounded-sm">
+                        <p className={evaluatedAnswers[9] === "correct" ? "resTrue" : "resFalse"}>
                            Vrai
                         </p>
                         <p className="mb-2">
