@@ -34,7 +34,7 @@ const HomePage = () => {
       <>
          <header className="absolute shadow-lg top-0 left-0 w-full z-10 bg-custom-green">
             <div className="container py-3 flex justify-between items-center">
-               <div className="font-logo text-custom-blue text-2xl sm:text-3xl pb-2 cursor-pointer">
+               <div className="font-logo text-title text-2xl sm:text-3xl pb-2 cursor-pointer">
                   Carbon Quest
                </div>
                <ul className="flex items-center gap-4">
@@ -60,7 +60,7 @@ const HomePage = () => {
             </div>
          </header>
 
-         <main className="flex flex-1 py-4">
+         <main className="flex flex-1 py-8">
             <div className="container flex flex-col xl:flex-row gap-4">
                <div className="flex flex-col  w-full xl:w-1/2 bg-[#f5f8f6] rounded-lg justify-center py-10 px-10">
                   <h2>Carbon Quest, quésaco ?</h2>
@@ -87,7 +87,7 @@ const HomePage = () => {
                      <ul className="pb-4 list-disc list-inside">
                         <li className="pb-2">
                            Utilisez les touches directionnelles et la barre d'espace pour
-                           vous déplacer vers le haut de la forêt.
+                           vous déplacer.
                         </li>
                         <li className="pb-2">
                            À chaque palier, un esprit de la forêt vous posera une
@@ -105,7 +105,7 @@ const HomePage = () => {
                      <p>Parviendrez-vous à réduire la pollution numérique ?</p>
                      <button
                         onClick={handleLoginModal}
-                        className="flex text-md font-semibold bg-title hover:bg-text-light transition-200 rounded-lg text-white px-5 py-2 transition-200 mx-auto mt-8"
+                        className="flex text-md font-semibold bg-title hover:bg-text-light transition-200 rounded-lg text-white px-5 py-2 transition-200 mx-auto mt-6"
                      >
                         Jouer
                      </button>
