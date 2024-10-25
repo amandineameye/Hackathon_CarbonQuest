@@ -101,6 +101,7 @@ const Signup = ({ onSwitchToLogin, onSuccessfulConnection }) => {
                      onChange={(e) => setEmail(e.target.value)}
                      required
                      className="input"
+                     placeholder='max.10 caractères'
                      {...register('email')}
                   />
                   {errors.email && (
@@ -119,6 +120,7 @@ const Signup = ({ onSwitchToLogin, onSuccessfulConnection }) => {
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
                         required
+                        placeholder='min. 8 caractères'
                         {...register('password')}
                      />
                      {showPassword ? (
