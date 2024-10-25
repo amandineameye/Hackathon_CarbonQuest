@@ -112,7 +112,7 @@ const HomePage = () => {
                      </button>
                   </div>
                </div>
-               <div className="flex flex-col w-full xl:w-1/2">
+               <div className="flex justify-center flex-col w-full xl:w-1/2">
                   <img src={homeImage} alt="" />
                </div>
             </div>
