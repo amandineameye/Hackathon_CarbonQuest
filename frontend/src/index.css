@@ -37,10 +37,6 @@
       @apply transition duration-200 ease-in-out;
    }
 
-   li:not(:last-child) {
-      @apply pb-2
-   }
-
    h1 {
       @apply text-4xl text-title font-title font-bold ;
    }

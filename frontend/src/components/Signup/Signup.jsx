@@ -41,6 +41,10 @@ const Signup = ({ onSwitchToLogin, onSuccessfulConnection }) => {
          	"Erreur lors de l’inscription:",
          	error.response || error.message
          );
+         console.error(
+         	"Erreur lors de l’inscription:",
+         	error.response || error.message
+         );
       }
    };
 

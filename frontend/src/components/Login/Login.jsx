@@ -38,19 +38,12 @@ const Login = ({ onSwitchToSignup, onSuccessfulConnection }) => {
 				navigate("/game");
 				onSuccessfulConnection();
 			} else {
-				setErrorMessage(response.data.message || "Identifiants incorrects.");
+				setErrorMessage("Identifiants incorrects.");
 			}
 		} catch (error) {
-			if (error.response) {
-				setErrorMessage(
-					error.response.data.message ||
-						"Une erreur est survenue. Veuillez réessayer plus tard."
-				);
-			} else {
-				setErrorMessage(
-					"Une erreur est survenue. Veuillez réessayer plus tard."
-				);
-			}
+			setErrorMessage(
+				"Une erreur est survenue. Veuillez réessayer plus tard."
+		);
 			console.error(
 				"Erreur lors de la connexion:",
 				error.response || error.message
