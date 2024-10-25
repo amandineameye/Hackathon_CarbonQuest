@@ -1,7 +1,23 @@
 import { useState } from "react";
 import axios from "axios";
+import { z } from 'zod';
+import { useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
+
+const UserSchema = z.object({
+   username: z.string()
+      .min(1, { message: '1 caractère minimum' })
+      .max(10, { message: '10 caractères maximum' })
+      .trim(),
+   email: z.string()
+      .email({ message: 'Email incorrect' }),
+   password: z.string()
+      .min(8, { message: '8 caractères minimum' })
+      .max(15, { message: '15 caractères maximum' }),
+});
+
 
 const Signup = ({ onSwitchToLogin, onSuccessfulConnection }) => {
    const [showPassword, setShowPassword] = useState(false);
@@ -12,18 +28,22 @@ const Signup = ({ onSwitchToLogin, onSuccessfulConnection }) => {
 
    const navigate = useNavigate();
 
+   const { register, formState: { errors } } = useForm({
+      resolver: zodResolver(UserSchema)
+   });
+
    const handleSubmit = async (e) => {
       e.preventDefault();
       const playerData = { username, email, password };
       try {
          const response = await axios.post(
-         	`${process.env.REACT_APP_API_URL}/signup`,
-         	playerData,
-         	{
-         		headers: {
-         			"Content-Type": "application/json",
-         		},
-         	}
+            `${process.env.REACT_APP_API_URL}/signup`,
+            playerData,
+            {
+               headers: {
+                  "Content-Type": "application/json",
+               },
+            }
          );
          /**
           * data.success = bool
@@ -38,12 +58,12 @@ const Signup = ({ onSwitchToLogin, onSuccessfulConnection }) => {
          }
       } catch (error) {
          console.error(
-         	"Erreur lors de l’inscription:",
-         	error.response || error.message
+            "Erreur lors de l’inscription:",
+            error.response || error.message
          );
          console.error(
-         	"Erreur lors de l’inscription:",
-         	error.response || error.message
+            "Erreur lors de l’inscription:",
+            error.response || error.message
          );
       }
    };
@@ -64,7 +84,11 @@ const Signup = ({ onSwitchToLogin, onSuccessfulConnection }) => {
                      onChange={(e) => setUsername(e.target.value)}
                      required
                      className="input"
+                     {...register('username')}
                   />
+                  {errors.username && (
+                     <span className="text-red-500">{errors.username.message}</span>
+                  )}
                </div>
                <div>
                   <label htmlFor="email" className="input-label">
@@ -77,7 +101,11 @@ const Signup = ({ onSwitchToLogin, onSuccessfulConnection }) => {
                      onChange={(e) => setEmail(e.target.value)}
                      required
                      className="input"
+                     {...register('email')}
                   />
+                  {errors.email && (
+                     <span className="text-red-500">{errors.email.message}</span>
+                  )}
                </div>
                <div>
                   <label htmlFor="password" className="input-label">
@@ -91,6 +119,7 @@ const Signup = ({ onSwitchToLogin, onSuccessfulConnection }) => {
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
                         required
+                        {...register('password')}
                      />
                      {showPassword ? (
                         <FaEye
@@ -102,6 +131,9 @@ const Signup = ({ onSwitchToLogin, onSuccessfulConnection }) => {
                            className="text-darkerText absolute top-1/2 right-3 -translate-y-1/2 cursor-pointer "
                            onClick={() => setShowPassword(!showPassword)}
                         />
+                     )}
+                     {errors.password && (
+                        <span className="text-red-500">{errors.password.message}</span>
                      )}
                   </div>
                </div>
