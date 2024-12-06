@@ -18,6 +18,10 @@ Node
  npm i
  ```
 
+## Tester le jeu
+👩‍💻 Pseudo : User
+🔒 Mot de passe : password
+
  ### Dépendence
 - Axios
 - React Icons
