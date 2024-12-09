@@ -2,10 +2,10 @@
 -- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: Oct 25, 2024 at 03:13 AM
--- Server version: 10.4.32-MariaDB
--- PHP Version: 8.2.12
+-- Hôte : 127.0.0.1
+-- Généré le : lun. 09 déc. 2024 à 13:22
+-- Version du serveur : 10.4.32-MariaDB
+-- Version de PHP : 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `carbonquest`
+-- Base de données : `carbonquest`
 --
 CREATE DATABASE IF NOT EXISTS `carbonquest` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
 USE `carbonquest`;
@@ -26,7 +26,7 @@ USE `carbonquest`;
 -- --------------------------------------------------------
 
 --
--- Table structure for table `score`
+-- Structure de la table `score`
 --
 
 CREATE TABLE `score` (
@@ -36,18 +36,16 @@ CREATE TABLE `score` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `score`
+-- Déchargement des données de la table `score`
 --
 
 INSERT INTO `score` (`id`, `user_id`, `value`) VALUES
-(1, 1, 5),
-(2, 2, 4),
-(3, 4, 6);
+(1, 1, 10);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `user`
+-- Structure de la table `user`
 --
 
 CREATE TABLE `user` (
@@ -58,55 +56,51 @@ CREATE TABLE `user` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `user`
+-- Déchargement des données de la table `user`
 --
 
 INSERT INTO `user` (`id`, `username`, `email`, `password`) VALUES
-(1, 'test1', 't1@mail.net', '$2y$12$UccvF/CUtDy0KvR8/DcWseUpYBd78V710Ys9b7ar4TW6iVVzsQuS.'),
-(2, 'test2', 't2@mail.net', '$2y$12$ONhNIOoLjoIia3QZuwzYk.aMkKMhhQVdIZ9tRa0bv4nn5jI4RKfhK'),
-(3, 'test3', 't3@mail.net', '$2y$12$pB5RvrQfl2L57jVNOwwXPOokI3eZsd568RkKE79qAcUYYN74MOaeq'),
-(4, 'test4', 't4@mail.net', '$2y$12$jwncxZL/qPgxeYfa5mhfJ.iptY0bVF/7mmWv.aANVA4FxKrf.ki5u'),
-(5, 'test5', 't5@mail.net', '$2y$12$0RvhXj8pEaIEmx7BTtgTh.7CMPDQQXPn4XtXf8rMiFHuGMVjTtJ.y');
+(1, 'User', 'user@gmail.com', '$2y$12$//EtlQHH3KlT8gQCzF2Hv.O.yLgWuPP8h7DOKE37EKa/nYVh2fXTG');
 
 --
--- Indexes for dumped tables
+-- Index pour les tables déchargées
 --
 
 --
--- Indexes for table `score`
+-- Index pour la table `score`
 --
 ALTER TABLE `score`
   ADD PRIMARY KEY (`id`),
   ADD KEY `idUser` (`user_id`);
 
 --
--- Indexes for table `user`
+-- Index pour la table `user`
 --
 ALTER TABLE `user`
   ADD PRIMARY KEY (`id`);
 
 --
--- AUTO_INCREMENT for dumped tables
+-- AUTO_INCREMENT pour les tables déchargées
 --
 
 --
--- AUTO_INCREMENT for table `score`
+-- AUTO_INCREMENT pour la table `score`
 --
 ALTER TABLE `score`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
-
---
--- AUTO_INCREMENT for table `user`
---
-ALTER TABLE `user`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
--- Constraints for dumped tables
+-- AUTO_INCREMENT pour la table `user`
+--
+ALTER TABLE `user`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+
+--
+-- Contraintes pour les tables déchargées
 --
 
 --
--- Constraints for table `score`
+-- Contraintes pour la table `score`
 --
 ALTER TABLE `score`
   ADD CONSTRAINT `score_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
