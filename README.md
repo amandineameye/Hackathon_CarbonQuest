@@ -1,9 +1,9 @@
 # Carbon Quest 🤖
 
- Carbon Quest est un jeu éducatif de plates-formes qui vous invite à explorer les enjeux du Green IT, l’ensemble des pratiques visant à réduire l’impact environnemental des technologies numériques, de leur conception à leur utilisation.
+Carbon Quest est un jeu éducatif de plates-formes qui vous invite à explorer les enjeux du Green IT, l’ensemble des pratiques visant à réduire l’impact environnemental des technologies numériques, de leur conception à leur utilisation.
 
 🎯 But du jeu<br />
-Votre mission est de grimper jusqu’au sommet de la canopée avant la fin du temps imparti, tout en répondant correctement à un maximum de questions. Votre score final influence l’état du ciel, que vous ne découvrirez qu’une fois arrivés en haut. Un ciel dégagé est le signe de bonnes réponses, tandis qu’un ciel sombre reflète des erreurs accumulées.
+Votre mission est de grimper jusqu’au sommet de la canopée, tout en répondant correctement à un maximum de questions.
 
 👾 Comment jouer ?<br />
 Utilisez les touches directionnelles et la barre d'espace pour vous déplacer vers le haut de la forêt.
@@ -13,8 +13,19 @@ Une fois au sommet, vous pourrez consulter vos réponses, voir vos erreurs, et e
 
 💪 Parviendrez-vous à réduire la pollution numérique ?
 
- ## Installation
- ### Backend
+
+## Visuals
+
+![Imgur](https://tinyurl.com/bd2da62c)
+![Imgur](https://tinyurl.com/yzjzudkw)
+![Imgur](https://tinyurl.com/45rrddxc)
+![Imgur](https://tinyurl.com/2yemrhrp)
+
+
+## Installation
+### Backend
+Installer la base de données en suivant les instructions du fichier `info.md` du dossier `/backend`
+
 Lancer le serveur
 ```
 php -S localhost:8000
@@ -37,9 +48,9 @@ Lancer le serveur
 🔒 Mot de passe : password
 
  ### Dépendences
-- Axios
-- React Icons
-- React Router Dom
-- React Unity Webgl
-- Zod
-- React Hook Form
+* Axios
+* React Icons
+* React Router Dom
+* React Unity Webgl
+* Zod
+* React Hook Form

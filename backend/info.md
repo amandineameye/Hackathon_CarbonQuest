@@ -9,9 +9,9 @@ Pour tester l'api il faut activer les serveurs suivants :
 
 ## Base de données
 
-URI code sql : `app/db/carbonquest.sql`
--> code contenant une instruction de construction de la bd et une instruction d'insertion de données pour les tests
---> pour chaque user pré-existant : password = username
+URI code sql : `app/db/carbonquest.sql` <br />
+* code contenant une instruction de construction de la bd et une instruction d'insertion de données pour les tests
+* test avec le user pré-existant : Pseudo = User & Mot de passe = password
 
 **Importer la bd :**
 1. Dans XAMPP / MAMP, lancer les serveurs Apache et MySQL.
