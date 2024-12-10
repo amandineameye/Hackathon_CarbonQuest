@@ -37,13 +37,19 @@ function connect() {
         $cnx = new PDO(DSN, USERNAME, PASSWORD);
         $cnx->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     } catch (Exception $e) {
-        echo "Database Error : " . $e->getMessage();
+        error_log("Database Error: " . $e->getMessage());
+        return null;
     }
     return $cnx;
 }
 
 function addUser() {
     $cnx = connect();
+    if ($cnx === null) {
+        $data = ['success' => 0, 'message' => "Database connection failed"];
+        echo json_encode($data);
+        return;
+    }
     $user = json_decode(file_get_contents('php://input'));
 
     // vérification compte existant
@@ -83,6 +89,11 @@ function addUser() {
 
 function verifyUser() {
     $cnx = connect();
+    if ($cnx === null) {
+        $data = ['success' => 0, 'message' => "Database connection failed"];
+        echo json_encode($data);
+        return;
+    }
     $user = json_decode(file_get_contents('php://input'));
 
     $sql = "SELECT * FROM user WHERE username=:username";
@@ -106,6 +117,11 @@ function verifyUser() {
 
 function addScore() {
     $cnx = connect();
+    if ($cnx === null) {
+        $data = ['success' => 0, 'message' => "Database connection failed"];
+        echo json_encode($data);
+        return;
+    }
     $postData = json_decode(file_get_contents('php://input'));   // score, username
 
     // vérification identifiant reçu
@@ -178,6 +194,11 @@ function addScore() {
 
 function getScores() {
     $cnx = connect();
+    if ($cnx === null) {
+        $data = ['success' => 0, 'message' => "Database connection failed", 'scores' => null];
+        echo json_encode($data);
+        return;
+    }
     
     $sql = "SELECT id, username FROM user";
     $stmt = $cnx->prepare($sql);
