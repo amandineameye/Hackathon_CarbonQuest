@@ -10,6 +10,8 @@ import axios from "axios";
 const ResultsPage = () => {
 	const location = useLocation();
 	const answersString = location.state?.answersString;
+
+	//Hardcoded past scores until we make a MongoDB database
 	const userScores = [6, 7, 8];
 	const rightAnswers = [
 		true,
