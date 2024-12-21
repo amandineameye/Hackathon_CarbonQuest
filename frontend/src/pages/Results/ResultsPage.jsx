@@ -398,3 +398,22 @@ const ResultsPage = () => {
 };
 
 export default ResultsPage;
+
+// const getResultInfo = (score) => {
+//     if (score <= 4) return { title: "Nouveau-né du Green IT", description: "Tu commences à découvrir le sujet.", color: "custom-pink" };
+//     if (score === 5) return { title: "Apprenti Écoresponsable", description: "Tu es en bonne voie mais il te reste des progrès à faire.", color: "custom-purple" };
+//     if (score >= 6 && score <= 8) return { title: "Éco-Explorateur", description: "Tu maîtrises bien les bases du Green IT.", color: "custom-yellow" };
+//     return { title: "Green IT Guru", description: "Tu excelles sur le sujet !", color: "custom-light-green" };
+//   };
+
+//   const resultInfo = getResultInfo(currentScore);
+
+//   return (
+//     <div>
+//       <h3 className={`bg-${resultInfo.color} p-1 rounded-sm`}>{resultInfo.title}</h3>
+//       <p>{resultInfo.description}</p>
+//       <div className={`mt-4 rounded-full mx-auto bg-${resultInfo.color} w-20 h-20 flex items-center justify-center text-white text-4xl font-bold`}>
+//         {currentScore}
+//       </div>
+//     </div>
+//   );
