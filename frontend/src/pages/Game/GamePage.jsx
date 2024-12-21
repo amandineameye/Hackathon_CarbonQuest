@@ -1,7 +1,6 @@
 import { Unity, useUnityContext } from "react-unity-webgl";
 import { useEffect, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
-import { useLocation } from "react-router-dom";
 
 const GamePage = () => {
 	const { unityProvider, addEventListener, removeEventListener } =
@@ -12,11 +11,14 @@ const GamePage = () => {
 			codeUrl: "../game/Build/build2.wasm",
 		});
 	const navigate = useNavigate();
-	const location = useLocation();
 
-	const handleEndGame = useCallback((answersString) => {
-		console.log(answersString);
-	}, []);
+	const handleEndGame = useCallback(
+		(answersString) => {
+			console.log(answersString);
+			navigate("/results", { state: { answersString } });
+		},
+		[navigate]
+	);
 
 	useEffect(() => {
 		addEventListener("ButtonClicked", handleEndGame);
