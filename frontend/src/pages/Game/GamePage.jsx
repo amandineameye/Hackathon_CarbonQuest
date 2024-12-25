@@ -5,10 +5,10 @@ import { useNavigate } from "react-router-dom";
 const GamePage = () => {
 	const { unityProvider, addEventListener, removeEventListener } =
 		useUnityContext({
-			loaderUrl: "../game/Build/build2.loader.js",
-			frameworkUrl: "../game/Build/build2.framework.js",
-			dataUrl: "../game/Build/build2.data",
-			codeUrl: "../game/Build/build2.wasm",
+			loaderUrl: "../game/Build/build4.loader.js",
+			frameworkUrl: "../game/Build/build4.framework.js",
+			dataUrl: "../game/Build/build4.data",
+			codeUrl: "../game/Build/build4.wasm",
 		});
 	const navigate = useNavigate();
 
