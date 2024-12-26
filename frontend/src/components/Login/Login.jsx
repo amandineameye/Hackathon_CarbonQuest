@@ -10,22 +10,22 @@ const Login = ({ onSwitchToSignup, onSuccessfulConnection }) => {
 	const [errorMessage, setErrorMessage] = useState("");
 
 	const navigate = useNavigate();
-	const baseServerURL = "http://localhost:3001/";
+	const serverBaseURL = "http://localhost:3001/";
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
 
 		if (!username || !password) {
-			setErrorMessage("Il faut remplir le pseudo et le mot de passe.");
+			setErrorMessage("Il faut remplir tous les champs.");
 		} else {
 			try {
-				const response = await axios.post(baseServerURL + "login", {
+				const response = await axios.post(serverBaseURL + "login", {
 					username,
 					password,
 				});
 				console.log(response.data.message);
 				setErrorMessage("");
-				navigate("/game");
+				navigate("/game", { state: { username: username } });
 			} catch (error) {
 				console.log("Login error: ", error);
 				if (error.response.data) {

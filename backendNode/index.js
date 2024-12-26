@@ -8,7 +8,7 @@ app.use(express.json());
 
 app.use(
 	cors({
-		origin: "http://localhost:5173", // Or your frontend's actual origin, or '*' for any origin (less secure in production)
+		origin: "http://localhost:5173", //or '*' for any origin (less secure in production)
 	})
 );
 
@@ -83,16 +83,14 @@ app.post("/register", async (req, res) => {
 
 	// Validate input
 	if (!username || !password) {
-		return res
-			.status(400)
-			.json({ error: "Username and password are required" });
+		return res.status(400).json({ error: "Tous les champs sont requis." });
 	}
 
 	try {
 		//Check if username already exists
 		const existingUser = await User.findOne({ username });
 		if (existingUser) {
-			return res.status(400).json({ error: "Username already taken" });
+			return res.status(400).json({ error: "Ce pseudo est déjà pris." });
 		}
 
 		// Create a new user
@@ -107,7 +105,11 @@ app.post("/register", async (req, res) => {
 		return res.status(201).json({ message: "User saved!" });
 	} catch (error) {
 		console.log("Error saving user: ", error);
-		return res.status(500).json({ error: "Failed to save user" });
+		return res
+			.status(500)
+			.json({
+				error: "Erreur lors de l'inscription. Veuillez réessayer plus tard.",
+			});
 	}
 });
 

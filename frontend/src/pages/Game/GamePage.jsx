@@ -1,6 +1,7 @@
 import { Unity, useUnityContext } from "react-unity-webgl";
 import { useEffect, useCallback } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
+import axios from "axios";
 
 const GamePage = () => {
 	const { unityProvider, addEventListener, removeEventListener } =
@@ -11,11 +12,42 @@ const GamePage = () => {
 			codeUrl: "../game/Build/build6.wasm",
 		});
 	const navigate = useNavigate();
+	const location = useLocation();
+	const username = location.state?.username;
+	const serverBaseURL = "http://localhost:3001/";
 
 	const handleEndGame = useCallback(
-		(answersString) => {
+		async (answersString) => {
+			console.log("handleEndGame triggered");
 			console.log(answersString);
-			navigate("/results", { state: { answersString } });
+			//Convert "1,0,1,0,0" to [1,0,1,0,0] (first from string to array of strings, then to array of numbers)
+			const answersToNumbersArray = answersString.split(",").map((answer) => {
+				return parseInt(answer);
+			});
+
+			const currentScore = answersToNumbersArray.reduce(
+				(accumulator, currentValue) => {
+					return accumulator + currentValue;
+				},
+				0
+			);
+
+			try {
+				const response = await axios.patch(serverBaseURL + "score", {
+					username,
+					score: currentScore,
+				});
+				console.log(response.data.message, response.data.updatedUser);
+			} catch (error) {
+				console.log(error);
+			}
+			navigate("/results", {
+				state: {
+					username: username,
+					answersToNumbersArray: answersToNumbersArray,
+					currentScore: currentScore,
+				},
+			});
 		},
 		[navigate]
 	);

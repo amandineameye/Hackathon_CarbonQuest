@@ -4,29 +4,36 @@ import {
 	AccordionPanel,
 } from "../../components/Accordion/Accordion";
 import { useLocation, useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
+import axios from "axios";
 
 const ResultsPage = () => {
 	const navigate = useNavigate();
 	const location = useLocation();
-	const answersString = location.state?.answersString;
+	const [allScores, setAllScores] = useState([]);
+	const { username, currentScore, answersToNumbersArray } = location.state;
+	const serverBaseURL = "http://localhost:3001/";
 
-	//Hardcoded past scores until we make a MongoDB database
-	const userScores = [6, 7, 8];
+	const userScores = allScores.slice(0, -1);
 
-	//Convert "1,0,1,0,0" to [1,0,1,0,0] (first from string to array of strings, then to array of numbers)
-	const answersToNumbersArray = answersString.split(",").map((answer) => {
-		return parseInt(answer);
-	});
+	useEffect(() => {
+		const getAllScores = async () => {
+			try {
+				const response = await axios.get(
+					serverBaseURL + "oldScores?username=" + username
+				);
+				console.log(response.data.scoresArray);
+				setAllScores(response.data.scoresArray);
+			} catch (error) {
+				console.log("Error in the useEffect: ", error);
+			}
+		};
 
-	const currentScore = answersToNumbersArray.reduce(
-		(accumulator, currentValue) => {
-			return accumulator + currentValue;
-		},
-		0
-	);
+		getAllScores();
+	}, []);
 
 	const handleClick = () => {
-		navigate("/game");
+		navigate("/game", { state: { username: username } });
 	};
 
 	const result = () => {
@@ -98,11 +105,12 @@ const ResultsPage = () => {
 						<h2>Tes précédents scores</h2>
 						<div className="flex justify-center gap-4">
 							{/* Ici, il faut afficher les scores du tableau qu'on reçoit */}
-							{userScores.map((score) => (
-								<p className="rounded-full bg-text w-12 h-12 flex items-center justify-center text-white text-2xl font-semibold">
-									{score}
-								</p>
-							))}
+							{userScores.length > 0 &&
+								userScores.map((score) => (
+									<p className="rounded-full bg-text w-12 h-12 flex items-center justify-center text-white text-2xl font-semibold">
+										{score}
+									</p>
+								))}
 						</div>
 					</div>
 				)}
@@ -124,7 +132,7 @@ const ResultsPage = () => {
 							<AccordionPanel>
 								<p
 									className={
-										answersToNumbersArray[0] === 1 ? "resTrue" : "resFalse"
+										answersToNumbersArray?.[0] === 1 ? "resTrue" : "resFalse"
 									}
 								>
 									Vrai
@@ -151,7 +159,7 @@ const ResultsPage = () => {
 							<AccordionPanel>
 								<p
 									className={
-										answersToNumbersArray[1] === 1 ? "resTrue" : "resFalse"
+										answersToNumbersArray?.[1] === 1 ? "resTrue" : "resFalse"
 									}
 								>
 									Faux
@@ -181,7 +189,7 @@ const ResultsPage = () => {
 							<AccordionPanel>
 								<p
 									className={
-										answersToNumbersArray[2] === 1 ? "resTrue" : "resFalse"
+										answersToNumbersArray?.[2] === 1 ? "resTrue" : "resFalse"
 									}
 								>
 									Vrai
@@ -209,7 +217,7 @@ const ResultsPage = () => {
 							<AccordionPanel>
 								<p
 									className={
-										answersToNumbersArray[3] === 1 ? "resTrue" : "resFalse"
+										answersToNumbersArray?.[3] === 1 ? "resTrue" : "resFalse"
 									}
 								>
 									Faux
@@ -236,7 +244,7 @@ const ResultsPage = () => {
 							<AccordionPanel>
 								<p
 									className={
-										answersToNumbersArray[4] === 1 ? "resTrue" : "resFalse"
+										answersToNumbersArray?.[4] === 1 ? "resTrue" : "resFalse"
 									}
 								>
 									Faux
@@ -263,7 +271,7 @@ const ResultsPage = () => {
 							<AccordionPanel>
 								<p
 									className={
-										answersToNumbersArray[5] === 1 ? "resTrue" : "resFalse"
+										answersToNumbersArray?.[5] === 1 ? "resTrue" : "resFalse"
 									}
 								>
 									Faux
@@ -291,7 +299,7 @@ const ResultsPage = () => {
 							<AccordionPanel>
 								<p
 									className={
-										answersToNumbersArray[6] === 1 ? "resTrue" : "resFalse"
+										answersToNumbersArray?.[6] === 1 ? "resTrue" : "resFalse"
 									}
 								>
 									Vrai
@@ -319,7 +327,7 @@ const ResultsPage = () => {
 							<AccordionPanel>
 								<p
 									className={
-										answersToNumbersArray[7] === 1 ? "resTrue" : "resFalse"
+										answersToNumbersArray?.[7] === 1 ? "resTrue" : "resFalse"
 									}
 								>
 									Vrai
@@ -347,7 +355,7 @@ const ResultsPage = () => {
 							<AccordionPanel>
 								<p
 									className={
-										answersToNumbersArray[8] === 1 ? "resTrue" : "resFalse"
+										answersToNumbersArray?.[8] === 1 ? "resTrue" : "resFalse"
 									}
 								>
 									Faux
@@ -373,7 +381,7 @@ const ResultsPage = () => {
 							<AccordionPanel>
 								<p
 									className={
-										answersToNumbersArray[9] === 1 ? "resTrue" : "resFalse"
+										answersToNumbersArray?.[9] === 1 ? "resTrue" : "resFalse"
 									}
 								>
 									Vrai

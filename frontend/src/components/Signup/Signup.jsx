@@ -21,7 +21,9 @@ const UserSchema = z.object({
 
 const Signup = ({ onSwitchToLogin, onSuccessfulConnection }) => {
 	const [showPassword, setShowPassword] = useState(false);
+	const [errorMessage, setErrorMessage] = useState("");
 	const navigate = useNavigate();
+	const serverBaseURL = "http://localhost:3001/";
 
 	const {
 		register,
@@ -31,7 +33,26 @@ const Signup = ({ onSwitchToLogin, onSuccessfulConnection }) => {
 		resolver: zodResolver(UserSchema),
 	});
 
-	const onSubmit = async (data) => {};
+	const onSubmit = async (data) => {
+		if (!data.username || !data.email || !data.password) {
+			setErrorMessage("Il faut remplir tous les champs.");
+		} else {
+			try {
+				const response = await axios.post(serverBaseURL + "register", {
+					username: data.username,
+					password: data.password,
+				});
+				console.log(response.data.message);
+				setErrorMessage("");
+				navigate("/game", { state: { username: data.username } });
+			} catch (error) {
+				console.log("Register error: ", error);
+				if (error.response?.data) {
+					setErrorMessage(error.response.data.error);
+				} else setErrorMessage("Erreur interne. Veuillez réessayer plus tard.");
+			}
+		}
+	};
 
 	return (
 		<div className="px-8 pt-14 pb-8">
@@ -104,7 +125,9 @@ const Signup = ({ onSwitchToLogin, onSuccessfulConnection }) => {
 					Créer un compte
 				</button>
 			</form>
-
+			{errorMessage && (
+				<p className="text-red-500 text-center mt-4">{errorMessage}</p>
+			)}
 			<p
 				className="text-center font-medium text-title mt-6"
 				onClick={onSwitchToLogin}
