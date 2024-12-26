@@ -3,9 +3,7 @@ import {
 	AccordionHeader,
 	AccordionPanel,
 } from "../../components/Accordion/Accordion";
-import { useState, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import axios from "axios";
 
 const ResultsPage = () => {
 	const navigate = useNavigate();
@@ -39,8 +37,8 @@ const ResultsPage = () => {
 						<h3 className="bg-[#f3d7d5] p-1 rounded-sm">
 							Nouveau-né du Green IT
 						</h3>
-						<p className="text-lg">Tu commences à décourvir le sujet.</p>
-						<div className="mt-4 rounded-full mx-auto bg-custom-pink w-20 h-20 flex items-center justify-center text-white text-4xl font-bold">
+						<p className="text-lg mt-6">Tu commences à décourvir le sujet.</p>
+						<div className="mt-6 rounded-full mx-auto bg-custom-pink w-20 h-20 flex items-center justify-center text-white text-4xl font-bold">
 							{currentScore}
 						</div>
 					</div>
@@ -51,8 +49,10 @@ const ResultsPage = () => {
 						<h3 className="bg-[#c1ada8] p-1 rounded-sm">
 							Apprenti Écoresponsable
 						</h3>
-						<p>Tu es en bonne voie mais il te reste des progrès à faire.</p>
-						<div className="mt-4 rounded-full mx-auto bg-custom-purple w-20 h-20 flex items-center justify-center text-white text-4xl font-bold">
+						<p className="mt-6">
+							Tu es en bonne voie mais il te reste des progrès à faire.
+						</p>
+						<div className="mt-6 rounded-full mx-auto bg-custom-purple w-20 h-20 flex items-center justify-center text-white text-4xl font-bold">
 							{currentScore}
 						</div>
 					</div>
@@ -61,8 +61,8 @@ const ResultsPage = () => {
 				return (
 					<div>
 						<h3 className="bg-[#dfe8ae] p-1 rounded-sm">Éco-Explorateur</h3>
-						<p>Tu maîtrise bien les bases du Green IT.</p>
-						<div className="mt-4 rounded-full mx-auto bg-custom-yellow w-20 h-20 flex items-center justify-center text-white text-4xl font-bold">
+						<p className="mt-6">Tu maîtrise bien les bases du Green IT.</p>
+						<div className="mt-6 rounded-full mx-auto bg-custom-yellow w-20 h-20 flex items-center justify-center text-white text-4xl font-bold">
 							{currentScore}
 						</div>
 					</div>
@@ -71,8 +71,8 @@ const ResultsPage = () => {
 				return (
 					<div>
 						<h3 className="bg-[#d5e5cd] p-1 rounded-sm">Green IT Guru</h3>
-						<p>Tu excelles le sujet !</p>
-						<div className="mt-4 rounded-full mx-auto bg-custom-light-green w-20 h-20 flex items-center justify-center text-white text-4xl font-bold">
+						<p className="mt-6">Tu excelles le sujet !</p>
+						<div className="mt-6 rounded-full mx-auto bg-custom-light-green w-20 h-20 flex items-center justify-center text-white text-4xl font-bold">
 							{currentScore}
 						</div>
 					</div>
