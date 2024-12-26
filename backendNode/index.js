@@ -2,6 +2,10 @@ const express = require("express");
 const mongoose = require("mongoose");
 const app = express();
 
+// Middleware to parse JSON bodies
+app.use(express.json());
+
+// Connect to MongoDB
 mongoose
 	.connect(
 		"mongodb+srv://admin:7JMTKQaBqrm5QO09@cluster0.fzoze.mongodb.net/carbonQuestDB"
@@ -9,6 +13,7 @@ mongoose
 	.then(() => console.log("MongoDB connected successfully"))
 	.catch((err) => console.log("Error connecting to MongoDB:", err));
 
+// Define User schema
 const userSchema = new mongoose.Schema({
 	username: {
 		type: String,
@@ -18,25 +23,134 @@ const userSchema = new mongoose.Schema({
 		type: String,
 		required: true,
 	},
-	score: {
+	scores: {
 		type: [Number],
 		required: false,
 	},
 });
 
+// Create User model
 const User = mongoose.model("User", userSchema);
 
-const newUser = new User({
-	username: "Amandine",
-	password: "bestPassword21",
-});
-
-newUser.save().then(() => console.log("User saved!"));
-
+// Start the server
 app.listen("3001", () => {
 	console.log("Server is running and listening on port 3001");
 });
 
-app.get("/", (req, res) => {
-	res.send("Server is running and MongoDB is connected!");
+// Login endpoint
+app.post("/login", async (req, res) => {
+	const { username, password } = req.body;
+
+	// Validate input
+	if (!username || !password) {
+		return res
+			.status(400)
+			.json({ error: "Username and password are required" });
+	}
+
+	try {
+		const userPassword = await User.findOne(
+			{ username },
+			{ password: 1, _id: 0 }
+		);
+
+		if (!userPassword) {
+			return res.status(400).json({ error: "Invalid credentials" });
+		}
+
+		if (password !== userPassword.password) {
+			return res.status(400).json({ error: "Invalid credentials" });
+		}
+
+		console.log("Right credentials!");
+		return res.status(200).json({ message: "Right credentials!" });
+	} catch (error) {
+		console.log("Internal server error while trying to login: ", error);
+		return res
+			.status(500)
+			.json({ error: "Internal server error while trying to login" });
+	}
+});
+
+// Register endpoint
+app.post("/register", async (req, res) => {
+	const { username, password } = req.body;
+
+	// Validate input
+	if (!username || !password) {
+		return res
+			.status(400)
+			.json({ error: "Username and password are required" });
+	}
+
+	try {
+		//Check if username already exists
+		const existingUser = await User.findOne({ username });
+		if (existingUser) {
+			return res.status(400).json({ error: "Username already taken" });
+		}
+
+		// Create a new user
+		const newUser = new User({
+			username,
+			password,
+		});
+
+		// Save the new user to the db
+		await newUser.save();
+		console.log("User saved!");
+		return res.status(201).json({ message: "User saved!" });
+	} catch (error) {
+		console.log("Error saving user: ", error);
+		return res.status(500).json({ error: "Failed to save user" });
+	}
+});
+
+app.patch("/score", async (req, res) => {
+	const { username, score } = req.body;
+
+	if (!username || !score) {
+		return res.status(400).json({ error: "Username and score are required" });
+	}
+
+	try {
+		const updatedUser = await User.findOneAndUpdate(
+			{ username }, // Find the user by username
+			{ $push: { scores: score } }, // Add the score to the scores array
+			{ new: true } // Option: Return the updated document instead of the old one
+		);
+
+		if (!updatedUser) {
+			return res.status(404).json({ error: "User not found" });
+		}
+
+		console.log("Score added!");
+		return res
+			.status(200)
+			.json({ message: "Score successfully added!", updatedUser: updatedUser });
+	} catch (error) {
+		console.error("Error adding score: ", error);
+		return res.status(500).json({ error: "Failed to add score" });
+	}
+});
+
+// GET /oldScores?username=Amandine
+
+app.get("/oldScores", async (req, res) => {
+	const { username } = req.query;
+
+	try {
+		const userScores = await User.findOne({ username }, { scores: 1, _id: 0 });
+
+		if (!userScores) {
+			return res.status(404).json({ error: "User not found" });
+		}
+
+		return res.status(200).json({ scoresArray: userScores.scores });
+	} catch (error) {
+		console.log("Internal error while trying to get old score: ", error);
+		return res
+			.status(500)
+			.json({ error: "Internal error while trying to get old score" });
+	}
 });
