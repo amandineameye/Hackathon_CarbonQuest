@@ -10,19 +10,28 @@ const Login = ({ onSwitchToSignup, onSuccessfulConnection }) => {
 	const [errorMessage, setErrorMessage] = useState("");
 
 	const navigate = useNavigate();
+	const baseServerURL = "http://localhost:3001/";
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
 
-		const defaultUsername = "test";
-		const defaultPassword = "password";
-
-		if (username !== defaultUsername) {
-			setErrorMessage("Ce pseudo n'existe pas.");
-		} else if (password !== defaultPassword) {
-			setErrorMessage("Le mot de passe est incorrect");
+		if (!username || !password) {
+			setErrorMessage("Il faut remplir le pseudo et le mot de passe.");
 		} else {
-			navigate("/game");
+			try {
+				const response = await axios.post(baseServerURL + "login", {
+					username,
+					password,
+				});
+				console.log(response.data.message);
+				setErrorMessage("");
+				navigate("/game");
+			} catch (error) {
+				console.log("Login error: ", error);
+				if (error.response.data) {
+					setErrorMessage(error.response.data.error);
+				} else setErrorMessage("Erreur interne. Veuillez réessayer plus tard.");
+			}
 		}
 	};
 

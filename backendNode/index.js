@@ -1,9 +1,16 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const app = express();
+const cors = require("cors");
 
 // Middleware to parse JSON bodies
 app.use(express.json());
+
+app.use(
+	cors({
+		origin: "http://localhost:5173", // Or your frontend's actual origin, or '*' for any origin (less secure in production)
+	})
+);
 
 // Connect to MongoDB
 mongoose
@@ -55,20 +62,18 @@ app.post("/login", async (req, res) => {
 		);
 
 		if (!userPassword) {
-			return res.status(400).json({ error: "Invalid credentials" });
+			return res.status(400).json({ error: "Identifiants invalides." });
 		}
 
 		if (password !== userPassword.password) {
-			return res.status(400).json({ error: "Invalid credentials" });
+			return res.status(400).json({ error: "Identifiants invalides." });
 		}
 
 		console.log("Right credentials!");
 		return res.status(200).json({ message: "Right credentials!" });
 	} catch (error) {
-		console.log("Internal server error while trying to login: ", error);
-		return res
-			.status(500)
-			.json({ error: "Internal server error while trying to login" });
+		console.log("Erreur interne: ", error);
+		return res.status(500).json({ error: "Erreur interne" });
 	}
 });
 
