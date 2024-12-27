@@ -39,7 +39,9 @@ const userSchema = new mongoose.Schema({
 const User = mongoose.model("User", userSchema);
 
 // Start the server
-app.listen("3001", () => {
+const port = process.env.PORT || 3001;
+
+app.listen(port, () => {
 	console.log("Server is running and listening on port 3001");
 });
 
