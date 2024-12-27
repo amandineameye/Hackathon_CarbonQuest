@@ -9,7 +9,9 @@ app.use(express.json());
 
 app.use(
 	cors({
-		origin: "*", //or '*' for any origin (less secure in production)
+		origin: "https://carbon-quest-seven.vercel.app", // Your frontend URL
+		methods: ["GET", "POST", "PUT", "DELETE"], // Allowed HTTP methods
+		credentials: true, // Allow cookies if needed
 	})
 );
 
