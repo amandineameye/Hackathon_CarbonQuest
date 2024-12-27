@@ -2,6 +2,7 @@ const express = require("express");
 const mongoose = require("mongoose");
 const app = express();
 const cors = require("cors");
+require("dotenv").config();
 
 // Middleware to parse JSON bodies
 app.use(express.json());
@@ -14,9 +15,7 @@ app.use(
 
 // Connect to MongoDB
 mongoose
-	.connect(
-		"mongodb+srv://admin:7JMTKQaBqrm5QO09@cluster0.fzoze.mongodb.net/carbonQuestDB"
-	)
+	.connect(process.env.MONGODB_CONNECTION_STRING)
 	.then(() => console.log("MongoDB connected successfully"))
 	.catch((err) => console.log("Error connecting to MongoDB:", err));
 
