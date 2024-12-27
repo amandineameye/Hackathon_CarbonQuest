@@ -10,6 +10,7 @@ const Login = ({ onSwitchToSignup, onSuccessfulConnection }) => {
 	const [errorMessage, setErrorMessage] = useState("");
 
 	const navigate = useNavigate();
+	const apiURL = "https://carbon-quest-api.vercel.app/";
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
@@ -18,13 +19,10 @@ const Login = ({ onSwitchToSignup, onSuccessfulConnection }) => {
 			setErrorMessage("Il faut remplir tous les champs.");
 		} else {
 			try {
-				const response = await axios.post(
-					import.meta.env.VITE_API_URL + "login",
-					{
-						username,
-						password,
-					}
-				);
+				const response = await axios.post(apiURL + "login", {
+					username,
+					password,
+				});
 				console.log(response.data.message);
 				setErrorMessage("");
 				navigate("/game", { state: { username: username } });

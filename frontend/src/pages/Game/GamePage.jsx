@@ -14,6 +14,7 @@ const GamePage = () => {
 	const navigate = useNavigate();
 	const location = useLocation();
 	const username = location.state?.username;
+	const apiURL = "https://carbon-quest-api.vercel.app/";
 
 	const handleEndGame = useCallback(
 		async (answersString) => {
@@ -32,13 +33,10 @@ const GamePage = () => {
 			);
 
 			try {
-				const response = await axios.patch(
-					import.meta.env.VITE_API_URL + "score",
-					{
-						username,
-						score: currentScore,
-					}
-				);
+				const response = await axios.patch(apiURL + "score", {
+					username,
+					score: currentScore,
+				});
 				console.log(response.data.message, response.data.updatedUser);
 			} catch (error) {
 				console.log(error);
