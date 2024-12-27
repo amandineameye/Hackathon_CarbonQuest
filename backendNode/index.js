@@ -8,7 +8,7 @@ app.use(express.json());
 
 app.use(
 	cors({
-		origin: "http://localhost:5173", //or '*' for any origin (less secure in production)
+		origin: "*", //or '*' for any origin (less secure in production)
 	})
 );
 
@@ -105,11 +105,9 @@ app.post("/register", async (req, res) => {
 		return res.status(201).json({ message: "User saved!" });
 	} catch (error) {
 		console.log("Error saving user: ", error);
-		return res
-			.status(500)
-			.json({
-				error: "Erreur lors de l'inscription. Veuillez réessayer plus tard.",
-			});
+		return res.status(500).json({
+			error: "Erreur lors de l'inscription. Veuillez réessayer plus tard.",
+		});
 	}
 });
 
@@ -153,6 +151,7 @@ app.get("/oldScores", async (req, res) => {
 			return res.status(404).json({ error: "User not found" });
 		}
 
+		console.log("Got old scores: ", userScores.scores);
 		return res.status(200).json({ scoresArray: userScores.scores });
 	} catch (error) {
 		console.log("Internal error while trying to get old score: ", error);

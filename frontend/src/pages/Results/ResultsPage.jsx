@@ -100,17 +100,16 @@ const ResultsPage = () => {
 					</div>
 				</div>
 
-				{userScores && (
+				{userScores.length > 0 && (
 					<div className="container text-center mt-12">
 						<h2>Tes précédents scores</h2>
 						<div className="flex justify-center gap-4">
 							{/* Ici, il faut afficher les scores du tableau qu'on reçoit */}
-							{userScores.length > 0 &&
-								userScores.map((score) => (
-									<p className="rounded-full bg-text w-12 h-12 flex items-center justify-center text-white text-2xl font-semibold">
-										{score}
-									</p>
-								))}
+							{userScores.map((score) => (
+								<p className="rounded-full bg-text w-12 h-12 flex items-center justify-center text-white text-2xl font-semibold">
+									{score}
+								</p>
+							))}
 						</div>
 					</div>
 				)}
