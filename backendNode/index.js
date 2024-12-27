@@ -45,6 +45,10 @@ app.listen(port, () => {
 	console.log("Server is running and listening on port 3001");
 });
 
+app.get("/", (req, res) => {
+	res.status(200).send("Welcome to the API!");
+});
+
 // Login endpoint
 app.post("/login", async (req, res) => {
 	const { username, password } = req.body;
