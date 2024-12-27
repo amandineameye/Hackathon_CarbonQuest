@@ -14,7 +14,6 @@ const GamePage = () => {
 	const navigate = useNavigate();
 	const location = useLocation();
 	const username = location.state?.username;
-	const serverBaseURL = "http://localhost:3001/";
 
 	const handleEndGame = useCallback(
 		async (answersString) => {
@@ -33,10 +32,13 @@ const GamePage = () => {
 			);
 
 			try {
-				const response = await axios.patch(serverBaseURL + "score", {
-					username,
-					score: currentScore,
-				});
+				const response = await axios.patch(
+					import.meta.env.VITE_API_URL + "score",
+					{
+						username,
+						score: currentScore,
+					}
+				);
 				console.log(response.data.message, response.data.updatedUser);
 			} catch (error) {
 				console.log(error);

@@ -23,7 +23,6 @@ const Signup = ({ onSwitchToLogin, onSuccessfulConnection }) => {
 	const [showPassword, setShowPassword] = useState(false);
 	const [errorMessage, setErrorMessage] = useState("");
 	const navigate = useNavigate();
-	const serverBaseURL = "http://localhost:3001/";
 
 	const {
 		register,
@@ -38,10 +37,13 @@ const Signup = ({ onSwitchToLogin, onSuccessfulConnection }) => {
 			setErrorMessage("Il faut remplir tous les champs.");
 		} else {
 			try {
-				const response = await axios.post(serverBaseURL + "register", {
-					username: data.username,
-					password: data.password,
-				});
+				const response = await axios.post(
+					import.meta.env.VITE_API_URL + "register",
+					{
+						username: data.username,
+						password: data.password,
+					}
+				);
 				console.log(response.data.message);
 				setErrorMessage("");
 				navigate("/game", { state: { username: data.username } });
