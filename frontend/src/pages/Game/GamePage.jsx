@@ -6,10 +6,10 @@ import axios from "axios";
 const GamePage = () => {
 	const { unityProvider, addEventListener, removeEventListener } =
 		useUnityContext({
-			loaderUrl: "../game/Build/build6.loader.js",
-			frameworkUrl: "../game/Build/build6.framework.js",
-			dataUrl: "../game/Build/build6.data",
-			codeUrl: "../game/Build/build6.wasm",
+			loaderUrl: "../game/Build/build8.loader.js",
+			frameworkUrl: "../game/Build/build8.framework.js",
+			dataUrl: "../game/Build/build8.data",
+			codeUrl: "../game/Build/build8.wasm",
 		});
 	const navigate = useNavigate();
 	const location = useLocation();
